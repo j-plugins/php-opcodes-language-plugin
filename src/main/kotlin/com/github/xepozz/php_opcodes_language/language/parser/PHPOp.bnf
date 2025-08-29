@@ -32,7 +32,11 @@ phpOpFile ::= item_*
 
 private item_ ::= block | COMMENT | EOL
 
-block ::= block_name COLON statements
+block ::= block_name COLON (statement | live_range | COMMENT | EOL)+
+{
+    pin=2
+}
+
 block_name ::= var_name | string_literal | method_name | function_name
 {
     implements=["com.intellij.psi.NavigatablePsiElement" "com.intellij.psi.PsiNamedElement" "com.intellij.psi.PsiLiteralValue"]
@@ -41,12 +45,22 @@ block_name ::= var_name | string_literal | method_name | function_name
 }
 
 private method_name ::= IDENTIFIER COLON COLON IDENTIFIER
+{
+    pin=3
+}
+
 private function_name ::= IDENTIFIER
 
-statements ::= (statement | COMMENT | EOL)+
-statement ::= line_number (assignment_instruction | instruction) | live_range
+statement ::= line_number (assignment_instruction | instruction)
+{
+    pin=1
+}
 
 assignment_instruction ::= (paren_parameter | parameter) EQUALS_SIGN instruction
+{
+    pin=2
+}
+
 instruction ::= parameter argument*
 
 argument ::= expr | paren_expr
@@ -72,6 +86,9 @@ string_literal ::= TEXT
 }
 
 paren_expr ::= LPAREN expr RPAREN
+{
+    pin=1
+}
 
 var_name ::= DOLLAR_SIGN IDENTIFIER
 {
@@ -79,11 +96,18 @@ var_name ::= DOLLAR_SIGN IDENTIFIER
     extends="com.github.xepozz.php_opcodes_language.language.psi.impl.PHPOpVarNameBaseImpl"
 }
 
-live_range ::= 'LIVE RANGES:' live_range_statements
-live_range_statements ::= (live_range_statement | EOL)*
+live_range ::= 'LIVE RANGES:' (live_range_statement | EOL)*
 
 live_range_statement ::= NUMBER COLON live_range_range LPAREN live_type RPAREN
+{
+    pin=2
+}
+
 live_range_range ::= line_number DASH line_number
+{
+    pin=2
+}
+
 live_type::= IDENTIFIER (SLASH IDENTIFIER)?
 
 line_number ::= NUMBER
