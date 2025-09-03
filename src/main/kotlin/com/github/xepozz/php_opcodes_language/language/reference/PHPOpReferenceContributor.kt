@@ -45,7 +45,10 @@ class PHPOpReferenceContributor : PsiReferenceContributor() {
                     if (element !is PHPOpBlockName) return PsiReference.EMPTY_ARRAY
 
                     return when {
-                        element.isClass -> arrayOf(PhpClassReference(element))
+                        element.isFqn -> arrayOf(
+                            PhpClassReference(element),
+                            PhpFunctionReference(element),
+                        )
                         element.isClassMethod -> arrayOf(
                             PhpClassReference(element, TextRange(0, element.text.indexOf("::"))),
                             PhpClassMethodReference(element),

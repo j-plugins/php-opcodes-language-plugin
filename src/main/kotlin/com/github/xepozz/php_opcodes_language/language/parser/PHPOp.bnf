@@ -22,7 +22,6 @@
     DOLLAR_SIGN = "DOLLAR_SIGN"
     EQUALS_SIGN = "EQUALS_SIGN"
     TEXT = "TEXT"
-    IDENTIFIER = "IDENTIFIER"
     COLON = "COLON"
     DASH = "DASH"
     THREE_DOTS = "THREE_DOTS"
@@ -42,7 +41,7 @@ block_name ::= var_name | string_literal | method_name | function_name
 {
     implements=["com.intellij.psi.NavigatablePsiElement" "com.intellij.psi.PsiNamedElement" "com.intellij.psi.PsiLiteralValue"]
     extends="com.github.xepozz.php_opcodes_language.language.psi.impl.PHPOpBlockNameBaseImpl"
-    methods=[isFunction isClass isClassMethod isMain]
+    methods=[isFqn isClassMethod isMain]
 }
 
 private method_name ::= IDENTIFIER COLON COLON IDENTIFIER

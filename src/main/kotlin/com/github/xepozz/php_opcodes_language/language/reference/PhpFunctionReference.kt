@@ -6,14 +6,14 @@ import com.intellij.psi.PsiElementResolveResult
 import com.intellij.psi.PsiPolyVariantReferenceBase
 import com.intellij.psi.ResolveResult
 
-class PhpClassReference(
+class PhpFunctionReference(
     val myElement: PsiElement,
     val textRange: TextRange = myElement.textRangeInParent,
 ) : PsiPolyVariantReferenceBase<PsiElement>(myElement, textRange) {
     override fun multiResolve(incompleteCode: Boolean): Array<out ResolveResult?> {
         val className = textRange.substring(myElement.text)
 
-        return PhpEntityResolver().resolveClasses(myElement.project, className)
+        return PhpEntityResolver().resolveFunction(myElement.project, className)
             .let { PsiElementResolveResult.createResults(it); }
     }
 }
