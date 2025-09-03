@@ -5,7 +5,6 @@ import com.github.xepozz.php_opcodes_language.language.psi.PHPOpBlockName
 import com.intellij.icons.AllIcons
 import com.intellij.ide.projectView.PresentationData
 import com.intellij.lang.ASTNode
-import com.intellij.openapi.util.NlsSafe
 import com.intellij.psi.PsiElement
 import com.intellij.psi.search.LocalSearchScope
 import com.intellij.psi.search.SearchScope
@@ -20,7 +19,7 @@ abstract class PHPOpBlockNameBaseImpl : PHPOpBlockName, PHPOpElementImpl {
 
     override fun getName(): String = text
 
-    override fun setName(name: @NlsSafe String): PsiElement? {
+    override fun setName(name: String): PsiElement? {
         TODO("Not yet implemented")
     }
 

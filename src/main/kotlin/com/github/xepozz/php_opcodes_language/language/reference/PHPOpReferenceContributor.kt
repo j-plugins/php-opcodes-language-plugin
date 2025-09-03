@@ -1,9 +1,11 @@
 package com.github.xepozz.php_opcodes_language.language.reference
 
+import com.github.xepozz.php_opcodes_language.language.psi.PHPOpBlockName
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpLineNumber
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpParameter
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpParenParameter
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpVarName
+import com.intellij.openapi.util.TextRange
 import com.intellij.patterns.PlatformPatterns
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiReference
@@ -32,5 +34,28 @@ class PHPOpReferenceContributor : PsiReferenceContributor() {
                 }
             }
         )
+
+        registrar.registerReferenceProvider(
+            PlatformPatterns.psiElement(PHPOpBlockName::class.java),
+            object : PsiReferenceProvider() {
+                override fun getReferencesByElement(
+                    element: PsiElement,
+                    context: ProcessingContext
+                ): Array<PsiReference> {
+                    if (element !is PHPOpBlockName) return PsiReference.EMPTY_ARRAY
+
+                    return when {
+                        element.isClass -> arrayOf(PhpClassReference(element))
+                        element.isClassMethod -> arrayOf(
+                            PhpClassReference(element, TextRange(0, element.text.indexOf("::"))),
+                            PhpClassMethodReference(element),
+                        )
+
+                        else -> PsiReference.EMPTY_ARRAY
+                    }
+                }
+            }
+        )
     }
 }
+
