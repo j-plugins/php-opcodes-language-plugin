@@ -6,4 +6,5 @@ enum class Primitives {
     string,
     double,
     `null`,
+    array,
 }

@@ -25,6 +25,7 @@
     IDENTIFIER = "IDENTIFIER"
     COLON = "COLON"
     DASH = "DASH"
+    THREE_DOTS = "THREE_DOTS"
   ]
 }
 
@@ -64,7 +65,7 @@ assignment_instruction ::= (paren_parameter | parameter) EQUALS_SIGN instruction
 instruction ::= parameter argument*
 
 argument ::= expr | paren_expr
-private expr ::= var_name | string_literal | line_number | paren_parameter | parameter
+private expr ::= three_dots | var_name | string_literal | line_number | paren_parameter | parameter
 
 paren_parameter ::= parameter paren_expr
 {
@@ -83,6 +84,10 @@ string_literal ::= TEXT
 {
     implements=["com.intellij.psi.PsiLanguageInjectionHost" "com.intellij.psi.PsiLiteralValue"]
     extends="com.github.xepozz.php_opcodes_language.language.psi.impl.PHPOpStringLiteralBaseImpl"
+}
+
+private three_dots ::= THREE_DOTS
+{
 }
 
 paren_expr ::= LPAREN expr RPAREN

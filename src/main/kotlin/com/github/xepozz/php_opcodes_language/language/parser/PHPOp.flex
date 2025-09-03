@@ -34,6 +34,7 @@ EQUALS_SIGN = "="
 COLON = ":"
 SLASH = "/"
 DASH = "-"
+THREE_DOTS = "..."
 
 %{
 private Stack<Integer> stack = new Stack<>();
@@ -63,6 +64,7 @@ public void yypopState() {
     {COLON}                                      { return PHPOpTypes.COLON; }
     {SLASH}                                      { return PHPOpTypes.SLASH; }
     {DASH}                                       { return PHPOpTypes.DASH; }
+    {THREE_DOTS}                                 { return PHPOpTypes.THREE_DOTS; }
     {NUMBER}                                     { return PHPOpTypes.NUMBER; }
     {QUOTTED_STRING}                             { return PHPOpTypes.TEXT; }
 
