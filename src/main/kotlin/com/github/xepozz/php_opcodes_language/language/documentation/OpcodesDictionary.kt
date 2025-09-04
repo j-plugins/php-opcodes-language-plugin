@@ -6,6 +6,47 @@ package com.github.xepozz.php_opcodes_language.language.documentation
 object OpcodesDictionary {
     private val directives = listOf(
         ParameterDoc(
+            name = "T",
+            number = 0,
+            description = """T-variable is a temporary variable, aimed to be pass the value between opcodes""",
+            // language=injectablephp
+            examplePhp = $$"""
+                <?php
+                $c = time() + 1;
+            """.trimIndent(),
+            // language="PHP Opcodes"
+            exampleOpcode = $$"""
+                $_main:
+                
+                0000 EXT_STMT
+                0001 INIT_FCALL 0 96 string("time")
+                0002 V1 = DO_ICALL
+                0003 T2 = ADD V1 int(1)
+                0004 ASSIGN CV0($c) T2
+                0005 RETURN int(1)
+            """.trimIndent(),
+        ),
+        ParameterDoc(
+            name = "V",
+            number = 0,
+            description = """V-variable is a temporary variable, aimed to hold value of the called function""",
+            // language=injectablephp
+            examplePhp = $$"""
+                <?php
+                echo time();
+            """.trimIndent(),
+            // language="PHP Opcodes"
+            exampleOpcode = $$"""
+                $_main:
+                
+                0000 EXT_STMT
+                0001 INIT_FCALL 0 96 string("time")
+                0002 V0 = DO_ICALL
+                0003 ECHO V0
+                0004 RETURN int(1)
+            """.trimIndent(),
+        ),
+        ParameterDoc(
             name = "ADD",
             number = 1,
             description = """Adds "value1" to "value2" and stores the result into "result"""",
