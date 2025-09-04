@@ -1,0 +1,26 @@
+
+$_main:
+     ; (lines=2, args=0, vars=0, tmps=1)
+     ; (before optimizer)
+     ; /Users/xepozz/IdeaProjects/xepozz/php-opcodes-lang-plugin/playground/class.php:1-18
+     ; return  [] RANGE[0..0]
+0000 EXT_STMT
+0001 RETURN int(1)
+
+App\HTTP\render:
+     ; (lines=2, args=0, vars=0, tmps=1)
+     ; (before optimizer)
+     ; /Users/xepozz/IdeaProjects/xepozz/php-opcodes-lang-plugin/playground/class.php:15-18
+     ; return  [] RANGE[0..0]
+0000 EXT_STMT
+0001 RETURN null
+
+App\HTTP\Controller::getAction:
+     ; (lines=4, args=0, vars=0, tmps=1)
+     ; (before optimizer)
+     ; /Users/xepozz/IdeaProjects/xepozz/php-opcodes-lang-plugin/playground/class.php:9-12
+     ; return  [] RANGE[0..0]
+0000 EXT_STMT
+0001 RETURN array(...)
+0002 EXT_STMT
+0003 RETURN null

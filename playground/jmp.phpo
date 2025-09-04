@@ -1,0 +1,71 @@
+
+$_main:
+     ; (lines=1, args=0, vars=0, tmps=1)
+     ; (before optimizer)
+     ; /Users/xepozz/IdeaProjects/xepozz/php-opcodes-lang-plugin/playground/jmp.php:1-36
+     ; return  [] RANGE[0..0]
+0000 RETURN int(1)
+
+if_regular:
+     ; (lines=6, args=0, vars=0, tmps=1)
+     ; (before optimizer)
+     ; /Users/xepozz/IdeaProjects/xepozz/php-opcodes-lang-plugin/playground/jmp.php:3-8
+     ; return  [] RANGE[0..0]
+0000 EXT_STMT
+0001 JMPZ bool(true) 0004
+0002 EXT_STMT
+0003 RETURN int(1)
+0004 EXT_STMT
+0005 RETURN null
+
+if_else_regular:
+     ; (lines=9, args=0, vars=0, tmps=1)
+     ; (before optimizer)
+     ; /Users/xepozz/IdeaProjects/xepozz/php-opcodes-lang-plugin/playground/jmp.php:10-17
+     ; return  [] RANGE[0..0]
+0000 EXT_STMT
+0001 JMPZ bool(true) 0005
+0002 EXT_STMT
+0003 RETURN int(1)
+0004 JMP 0007
+0005 EXT_STMT
+0006 RETURN int(2)
+0007 EXT_STMT
+0008 RETURN null
+
+if_elseif_regular:
+     ; (lines=11, args=0, vars=0, tmps=1)
+     ; (before optimizer)
+     ; /Users/xepozz/IdeaProjects/xepozz/php-opcodes-lang-plugin/playground/jmp.php:19-26
+     ; return  [] RANGE[0..0]
+0000 EXT_STMT
+0001 JMPZ bool(true) 0005
+0002 EXT_STMT
+0003 RETURN int(1)
+0004 JMP 0009
+0005 EXT_STMT
+0006 JMPZ bool(false) 0009
+0007 EXT_STMT
+0008 RETURN int(2)
+0009 EXT_STMT
+0010 RETURN null
+
+if_elseif_else_regular:
+     ; (lines=14, args=0, vars=0, tmps=1)
+     ; (before optimizer)
+     ; /Users/xepozz/IdeaProjects/xepozz/php-opcodes-lang-plugin/playground/jmp.php:27-36
+     ; return  [] RANGE[0..0]
+0000 EXT_STMT
+0001 JMPZ bool(true) 0005
+0002 EXT_STMT
+0003 RETURN int(1)
+0004 JMP 0012
+0005 EXT_STMT
+0006 JMPZ bool(false) 0010
+0007 EXT_STMT
+0008 RETURN int(2)
+0009 JMP 0012
+0010 EXT_STMT
+0011 RETURN int(3)
+0012 EXT_STMT
+0013 RETURN null
