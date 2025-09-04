@@ -10,6 +10,8 @@
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
+        <gotoDeclarationHandler
+                implementation="com.github.xepozz.php_opcodes_language.language.navigation.DeclarationHandler"/>
         <fileType
                 name="PHP Opcodes"
                 implementationClass="com.github.xepozz.php_opcodes_language.language.PHPOpFileType"

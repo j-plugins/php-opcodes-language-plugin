@@ -28,7 +28,7 @@ abstract class PHPOpBlockNameBaseImpl : PHPOpBlockName, PHPOpElementImpl {
     override fun getIcon(flags: Int) = AllIcons.Nodes.Property
 
     override fun getUseScope(): SearchScope {
-        val block = PhpPsiUtil.getParentOfClass(this, PHPOpBlock::class.java) ?: return super.getUseScope()
+        val block = PhpPsiUtil.getParentOfClass(this, PHPOpBlock::class.java) ?: return LocalSearchScope.EMPTY
         return LocalSearchScope(block)
     }
 }

@@ -47,6 +47,8 @@ abstract class PHPOpLineNumberBaseImpl : PHPOpLineNumber, PHPOpElementImpl {
         throw UnsupportedOperationException("Method bindToElement is not yet implemented in " + this.javaClass.getName())
     }
 
+    override fun canNavigate() = true
+
     override fun isReferenceTo(psiElement: PsiElement): Boolean {
         return when (psiElement) {
             is PHPOpLineNumber -> this.text == psiElement.text
@@ -57,7 +59,7 @@ abstract class PHPOpLineNumberBaseImpl : PHPOpLineNumber, PHPOpElementImpl {
     override fun isSoft() = false
 
     override fun getUseScope(): SearchScope {
-        val block = PhpPsiUtil.getParentOfClass(this, PHPOpBlock::class.java) ?: return super.getUseScope()
+        val block = PhpPsiUtil.getParentOfClass(this, PHPOpBlock::class.java) ?: return LocalSearchScope.EMPTY
         return LocalSearchScope(block)
     }
 }

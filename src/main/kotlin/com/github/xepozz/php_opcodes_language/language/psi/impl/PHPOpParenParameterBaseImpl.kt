@@ -47,6 +47,8 @@ abstract class PHPOpParenParameterBaseImpl : PHPOpParenParameter, PHPOpElementIm
         throw UnsupportedOperationException("Method bindToElement is not yet implemented in " + this.javaClass.getName())
     }
 
+    override fun canNavigate() = false
+
     override fun isReferenceTo(psiElement: PsiElement) = when (psiElement) {
         !is PHPOpParenParameter -> false
         else -> when {
@@ -58,7 +60,7 @@ abstract class PHPOpParenParameterBaseImpl : PHPOpParenParameter, PHPOpElementIm
     override fun isSoft() = false
 
     override fun getUseScope(): SearchScope {
-        val block = PhpPsiUtil.getParentOfClass(this, PHPOpBlock::class.java) ?: return super.getUseScope()
-        return LocalSearchScope(block)
+        val block = PhpPsiUtil.getParentOfClass(this, PHPOpBlock::class.java) ?: return LocalSearchScope.EMPTY
+        return LocalSearchScope(block.statementList.toTypedArray())
     }
 }

@@ -1,6 +1,7 @@
 package com.github.xepozz.php_opcodes_language.language.psi.impl
 
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpBlock
+import com.github.xepozz.php_opcodes_language.language.psi.PHPOpBlockName
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpTypes
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpVarName
 import com.intellij.icons.AllIcons
@@ -49,17 +50,19 @@ abstract class PHPOpVarNameBaseImpl : PHPOpVarName, PHPOpElementImpl, PsiNamedEl
         throw UnsupportedOperationException("Method bindToElement is not yet implemented in " + this.javaClass.getName())
     }
 
-    override fun isReferenceTo(psiElement: PsiElement): Boolean {
-        return when (psiElement) {
-            is PHPOpVarName -> this.text == psiElement.text
-            else -> false
-        }
+    override fun canNavigate() = parent !is PHPOpBlockName
+
+    override fun isReferenceTo(psiElement: PsiElement) = when (psiElement) {
+        is PHPOpVarName -> this.text == psiElement.text
+        else -> false
     }
 
     override fun isSoft() = false
 
     override fun getUseScope(): SearchScope {
-        val block = PhpPsiUtil.getParentOfClass(this, PHPOpBlock::class.java) ?: return super.getUseScope()
-        return LocalSearchScope(block)
+        if (parent is PHPOpBlockName) return LocalSearchScope.EMPTY
+
+        val block = PhpPsiUtil.getParentOfClass(this, PHPOpBlock::class.java) ?: return LocalSearchScope.EMPTY
+        return LocalSearchScope(block.statementList.toTypedArray())
     }
 }
