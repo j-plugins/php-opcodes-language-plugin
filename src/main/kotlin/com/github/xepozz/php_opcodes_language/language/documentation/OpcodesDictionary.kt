@@ -1,18 +1,16 @@
 package com.github.xepozz.php_opcodes_language.language.documentation
 
 /**
- * @example https://phpdoctest.github.io/en/internals2.opcodes.list.html
+ * See [examples](https://phpdoctest.github.io/en/internals2.opcodes.list.html)
  */
 object OpcodesDictionary {
     private val directives = listOf(
         ParameterDoc(
             name = "CV",
-            number = 0,
+            number = -1,
             description = """CV-variable is a reference to user-defined named variable""",
             // language=injectablephp
             examplePhp = $$"""
-                <?php
-
                 return $a;
             """.trimIndent(),
             // language="PHP Opcodes"
@@ -22,12 +20,10 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "T",
-            number = 0,
+            number = -1,
             description = """T-variable is a temporary variable, aimed to be pass the value between opcodes""",
             // language=injectablephp
             examplePhp = $$"""
-                <?php
-
                 return $a + $b;
             """.trimIndent(),
             // language="PHP Opcodes"
@@ -38,12 +34,10 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "V",
-            number = 0,
+            number = -1,
             description = """V-variable is a temporary variable, aimed to hold value of the called function""",
             // language=injectablephp
             examplePhp = $$"""
-                <?php
-
                 return time();
             """.trimIndent(),
             // language="PHP Opcodes"
@@ -55,12 +49,10 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "X",
-            number = 0,
+            number = -1,
             description = """X-variable is a reference to a variable with a specific purpose""",
             // language=injectablephp
             examplePhp = $$"""
-                <?php
-
                 // There are no known ways to obtain
                 // it for this type of variable
                 //
@@ -85,8 +77,6 @@ object OpcodesDictionary {
             description = """Used for addition operations""",
             // language=injectablephp
             examplePhp = $$"""
-                <?php
-
                 $a + $b;
             """.trimIndent(),
             // language="PHP Opcodes"
@@ -100,8 +90,6 @@ object OpcodesDictionary {
             description = """Used for subtraction operations""",
             // language=injectablephp
             examplePhp = $$"""
-                <?php
-
                 $a - $b;
             """.trimIndent(),
             // language="PHP Opcodes"
@@ -115,8 +103,6 @@ object OpcodesDictionary {
             description = """Used for multiply operations""",
             // language=injectablephp
             examplePhp = $$"""
-                <?php
-
                 $a * $b;
             """.trimIndent(),
             // language="PHP Opcodes"
@@ -130,8 +116,6 @@ object OpcodesDictionary {
             description = """Used for division operations""",
             // language=injectablephp
             examplePhp = $$"""
-                <?php
-
                 $a / $b;
             """.trimIndent(),
             // language="PHP Opcodes"
@@ -145,8 +129,6 @@ object OpcodesDictionary {
             description = """Used for modulo operations""",
             // language=injectablephp
             examplePhp = $$"""
-                <?php
-
                 $a % $b;
             """.trimIndent(),
             // language="PHP Opcodes"
@@ -160,8 +142,6 @@ object OpcodesDictionary {
             description = """Used for bitwise left shift operations""",
             // language=injectablephp
             examplePhp = $$"""
-                <?php
-
                 $a << $b;
             """.trimIndent(),
             // language="PHP Opcodes"
@@ -175,8 +155,6 @@ object OpcodesDictionary {
             description = """Used for bitwise right shift operations""",
             // language=injectablephp
             examplePhp = $$"""
-                <?php
-
                 $a >> $b;
             """.trimIndent(),
             // language="PHP Opcodes"
@@ -190,8 +168,6 @@ object OpcodesDictionary {
             description = """Used for concatenation operations""",
             // language=injectablephp
             examplePhp = $$"""
-                <?php
-
                 $a . $b;
             """.trimIndent(),
             // language="PHP Opcodes"
@@ -205,8 +181,6 @@ object OpcodesDictionary {
             description = """Used for bitwise "OR" operations""",
             // language=injectablephp
             examplePhp = $$"""
-                <?php
-
                 $a | $b;
             """.trimIndent(),
             // language="PHP Opcodes"
@@ -220,8 +194,6 @@ object OpcodesDictionary {
             description = """Used for bitwise "AND" operations""",
             // language=injectablephp
             examplePhp = $$"""
-                <?php
-
                 $a & $b;
             """.trimIndent(),
             // language="PHP Opcodes"
@@ -235,8 +207,6 @@ object OpcodesDictionary {
             description = """Used for bitwise "XOR" operations""",
             // language=injectablephp
             examplePhp = $$"""
-                <?php
-
                 $a ^ $b;
             """.trimIndent(),
             // language="PHP Opcodes"
@@ -250,8 +220,6 @@ object OpcodesDictionary {
             description = """Used for exponentiation operations""",
             // language=injectablephp
             examplePhp = $$"""
-                <?php
-
                 $a ** $b;
             """.trimIndent(),
             // language="PHP Opcodes"
@@ -265,8 +233,6 @@ object OpcodesDictionary {
             description = """Used to perform bit reversal operations in a number""",
             // language=injectablephp
             examplePhp = $$"""
-                <?php
-
                 ~$a;
             """.trimIndent(),
             // language="PHP Opcodes"
@@ -280,8 +246,6 @@ object OpcodesDictionary {
             description = """Used for logical negation""",
             // language=injectablephp
             examplePhp = $$"""
-                <?php
-
                 !$a;
             """.trimIndent(),
             // language="PHP Opcodes"
@@ -295,8 +259,6 @@ object OpcodesDictionary {
             description = """Used for logical "XOR" operations""",
             // language=injectablephp
             examplePhp = $$"""
-                <?php
-
                 $a xor $b;
             """.trimIndent(),
             // language="PHP Opcodes"
@@ -310,8 +272,6 @@ object OpcodesDictionary {
             description = """Used for logical strict identity comparison""",
             // language=injectablephp
             examplePhp = $$"""
-                <?php
-
                 $a === $b;
             """.trimIndent(),
             // language="PHP Opcodes"
@@ -325,8 +285,6 @@ object OpcodesDictionary {
             description = """Used for logical strict comparison of non-identity""",
             // language=injectablephp
             examplePhp = $$"""
-                <?php
-
                 $a !== $b;
             """.trimIndent(),
             // language="PHP Opcodes"
@@ -340,8 +298,6 @@ object OpcodesDictionary {
             description = """Used for logical non-strict equivalence comparison""",
             // language=injectablephp
             examplePhp = $$"""
-                <?php
-
                 $a == $b;
             """.trimIndent(),
             // language="PHP Opcodes"
@@ -355,8 +311,6 @@ object OpcodesDictionary {
             description = """Used for logical non-strict comparison of non-equivalence""",
             // language=injectablephp
             examplePhp = $$"""
-                <?php
-
                 $a != $b;
             """.trimIndent(),
             // language="PHP Opcodes"
@@ -370,8 +324,6 @@ object OpcodesDictionary {
             description = """Used for logical "less than" comparison""",
             // language=injectablephp
             examplePhp = $$"""
-                <?php
-
                 $a < $b;
             """.trimIndent(),
             // language="PHP Opcodes"
@@ -385,8 +337,6 @@ object OpcodesDictionary {
             description = """Used for logical "less than or equal" comparison""",
             // language=injectablephp
             examplePhp = $$"""
-                <?php
-
                 $a <= $b;
             """.trimIndent(),
             // language="PHP Opcodes"
@@ -400,8 +350,6 @@ object OpcodesDictionary {
             description = """Used to assign a value to a variable""",
             // language=injectablephp
             examplePhp = $$"""
-                <?php
-
                 $a = 42;
             """.trimIndent(),
             // language="PHP Opcodes"
@@ -415,8 +363,6 @@ object OpcodesDictionary {
             description = """Used to select an array element for further assignment of a value""",
             // language=injectablephp
             examplePhp = $$"""
-                <?php
-
                 $a[0] = 42;
             """.trimIndent(),
             // language="PHP Opcodes"
@@ -431,8 +377,6 @@ object OpcodesDictionary {
             description = """Used to select an object's property for further assignment of a value""",
             // language=injectablephp
             examplePhp = $$"""
-                <?php
-
                 $a->property = 42;
             """.trimIndent(),
             // language="PHP Opcodes"
@@ -447,8 +391,6 @@ object OpcodesDictionary {
             description = """Used to select a static property of a class for further assignment of a value to it""",
             // language=injectablephp
             examplePhp = $$"""
-                <?php
-
                 Example::$property = 42;
             """.trimIndent(),
             // language="PHP Opcodes"
@@ -463,8 +405,6 @@ object OpcodesDictionary {
             description = """Used to assign the results of an operation to the first operand""",
             // language=injectablephp
             examplePhp = $$"""
-                <?php
-
                 $a += 42;
                 $b .= 23;
                 $c /= 0xDEAD_BEEF;
@@ -482,8 +422,6 @@ object OpcodesDictionary {
             description = """Used to select an array element for further assignment of the operation result to it""",
             // language=injectablephp
             examplePhp = $$"""
-                <?php
-
                 $a[0] += 42;
 
                 $b[1] /= 23;
@@ -502,8 +440,6 @@ object OpcodesDictionary {
             description = """Used to select an object property for further assignment of the operation result to it""",
             // language=injectablephp
             examplePhp = $$"""
-                <?php
-
                 $a->prop1 += 42;
 
                 $b->prop2 /= 23;
@@ -522,8 +458,6 @@ object OpcodesDictionary {
             description = """Used to select a class static property for further assignment of the operation result to it""",
             // language=injectablephp
             examplePhp = $$"""
-                <?php
-
                 Example1::$prop1 += 42;
 
                 Example2::$prop2 /= 23;
@@ -542,8 +476,6 @@ object OpcodesDictionary {
             description = """Used to assign a reference to a variable""",
             // language=injectablephp
             examplePhp = $$"""
-                <?php
-
                 $a = &$b;
             """.trimIndent(),
             // language="PHP Opcodes"
@@ -557,8 +489,6 @@ object OpcodesDictionary {
             description = """Used to assign the result of a ternary operator to a variable""",
             // language=injectablephp
             examplePhp = $$"""
-                <?php
-
                 $a = $b ? 23 : 42;
             """.trimIndent(),
             // language="PHP Opcodes"
