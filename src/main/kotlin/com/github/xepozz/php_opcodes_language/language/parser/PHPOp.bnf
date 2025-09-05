@@ -27,6 +27,7 @@
     SLASH = "SLASH"
     BACKSLASH = "BACKSLASH"
     DOT = "DOT"
+    AT_SIGN = "AT_SIGN"
     LBRACE = "LBRACE"
     RBRACE = "RBRACE"
     LBRACKET = "LBRACKET"
@@ -50,7 +51,12 @@ block_name ::= var_name | string_literal | method_name | function_name | closure
     methods=[isFqn isClassMethod isMain]
 }
 
-private method_name ::= IDENTIFIER COLON COLON IDENTIFIER
+private class_name ::= ('class' AT_SIGN 'anonymous') | IDENTIFIER
+{
+    pin=3
+}
+
+private method_name ::= class_name COLON COLON IDENTIFIER
 {
     pin=3
 }

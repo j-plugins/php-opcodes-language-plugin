@@ -40,6 +40,7 @@ SLASH = "/"
 BACKSLASH = "\\"
 DASH = "-"
 DOT = "."
+AT_SIGN = "@"
 
 %{
 private Stack<Integer> stack = new Stack<>();
@@ -74,6 +75,7 @@ public void yypopState() {
     {SLASH}                                      { return PHPOpTypes.SLASH; }
     {BACKSLASH}                                  { return PHPOpTypes.BACKSLASH; }
     {DOT}                                        { return PHPOpTypes.DOT; }
+    {AT_SIGN}                                    { return PHPOpTypes.AT_SIGN; }
     {DASH}                                       { return PHPOpTypes.DASH; }
     {NUMBER}                                     { return PHPOpTypes.NUMBER; }
     {QUOTTED_STRING}                             { return PHPOpTypes.QUOTTED_STRING; }
