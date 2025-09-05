@@ -77,7 +77,8 @@ public void yypopState() {
     {DOT}                                        { return PHPOpTypes.DOT; }
     {AT_SIGN}                                    { return PHPOpTypes.AT_SIGN; }
     {DASH}                                       { return PHPOpTypes.DASH; }
-    {NUMBER}                                     { return PHPOpTypes.NUMBER; }
+    -?{NUMBER}\.{NUMBER}                         { return PHPOpTypes.FLOAT; }
+    -?{NUMBER}                                   { return PHPOpTypes.INTEGER; }
     {QUOTTED_STRING}                             { return PHPOpTypes.QUOTTED_STRING; }
 
     {WHITESPACE}                                 { return TokenType.WHITE_SPACE; }

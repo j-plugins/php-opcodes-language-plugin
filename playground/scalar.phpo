@@ -1,0 +1,22 @@
+$_main:
+     ; (lines=17, args=0, vars=0, tmps=2)
+     ; (before optimizer)
+     ; /Users/xepozz/IdeaProjects/xepozz/php-opcodes-lang-plugin/playground/scalar.php:1-17
+     ; return  [] RANGE[0..0]
+0000 EXT_STMT
+0001 INIT_FCALL 13 304 string("var_dump")
+0002 SEND_VAL string("string") 1
+0003 SEND_VAL string("string") 2
+0004 SEND_VAL int(0) 3
+0005 SEND_VAL int(123) 4
+0006 SEND_VAL float(123.456) 5
+0007 SEND_VAL int(123123) 6
+0008 SEND_VAL int(0) 7
+0009 SEND_VAL int(-123) 8
+0010 SEND_VAL float(-123.456) 9
+0011 SEND_VAL int(-123123) 10
+0012 SEND_VAL bool(true) 11
+0013 SEND_VAL bool(false) 12
+0014 SEND_VAL null 13
+0015 DO_ICALL
+0016 RETURN int(1)

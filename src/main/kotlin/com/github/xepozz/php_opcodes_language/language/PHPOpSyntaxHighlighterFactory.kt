@@ -17,7 +17,8 @@ internal class PHPOpSyntaxHighlighterFactory : SyntaxHighlighterFactory() {
         override fun getHighlightingLexer() = PHPOpLexerAdapter()
 
         override fun getTokenHighlights(tokenType: IElementType) = when (tokenType) {
-            PHPOpTypes.NUMBER -> NUMBER_KEYS
+            PHPOpTypes.INTEGER -> NUMBER_KEYS
+            PHPOpTypes.FLOAT -> NUMBER_KEYS
             PHPOpTypes.QUOTTED_STRING -> TEXT_KEYS
             PHPOpTypes.COMMENT -> COMMENT_KEYS
             TokenType.BAD_CHARACTER -> BAD_CHAR_KEYS

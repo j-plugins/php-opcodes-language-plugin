@@ -17,7 +17,7 @@ import com.jetbrains.php.lang.psi.PhpPsiUtil
 abstract class PHPOpLineNumberBaseImpl : PHPOpLineNumber, PHPOpElementImpl {
     constructor(node: ASTNode) : super(node)
 
-    override fun getName() = this.node.findChildByType(PHPOpTypes.NUMBER)?.text?.let {
+    override fun getName() = this.node.findChildByType(PHPOpTypes.INTEGER)?.text?.let {
         if (it.length == 4) {
             it
         } else null
