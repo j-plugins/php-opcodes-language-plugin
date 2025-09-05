@@ -45,11 +45,11 @@ block ::= block_name COLON (statement | live_range | COMMENT | EOL)+
     pin=2
 }
 
-block_name ::= var_name | string_literal | method_name | function_name | closure_name
+block_name ::= var_name | string_literal | getter_name | setter_name | method_name | function_name | closure_name
 {
     implements=["com.intellij.psi.NavigatablePsiElement" "com.intellij.psi.PsiNamedElement" "com.intellij.psi.PsiLiteralValue"]
     extends="com.github.xepozz.php_opcodes_language.language.psi.impl.PHPOpBlockNameBaseImpl"
-    methods=[isFqn isClassMethod isMain]
+    methods=[isFqn isClassMethod isClassPropertyHook isMain]
 }
 
 private class_name ::= ('class' AT_SIGN 'anonymous') | IDENTIFIER
@@ -60,6 +60,14 @@ private class_name ::= ('class' AT_SIGN 'anonymous') | IDENTIFIER
 private method_name ::= class_name COLON COLON IDENTIFIER
 {
     pin=3
+}
+
+private getter_name ::= class_name COLON COLON DOLLAR_SIGN IDENTIFIER COLON COLON 'get'
+{
+}
+
+private setter_name ::= class_name COLON COLON DOLLAR_SIGN IDENTIFIER COLON COLON 'set'
+{
 }
 
 private function_name ::= IDENTIFIER

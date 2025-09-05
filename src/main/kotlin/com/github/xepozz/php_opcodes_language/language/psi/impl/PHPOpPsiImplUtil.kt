@@ -31,6 +31,22 @@ class PHPOpPsiImplUtil {
         }
 
         @JvmStatic
+        fun isClassPropertyHook(element: PHPOpBlockName): Boolean = element.node.let {
+            val children = it.getChildren(null)
+            children.size == 8
+                    //class_name COLON COLON DOLLAR_SIGN IDENTIFIER COLON COLON 'get'
+                    && children[0].elementType == PHPOpTypes.IDENTIFIER
+                    && children[1].elementType == PHPOpTypes.COLON
+                    && children[2].elementType == PHPOpTypes.COLON
+                    && children[3].elementType == PHPOpTypes.DOLLAR_SIGN
+                    && children[4].elementType == PHPOpTypes.IDENTIFIER
+                    && children[5].elementType == PHPOpTypes.COLON
+                    && children[6].elementType == PHPOpTypes.COLON
+                    && children[7].elementType == PHPOpTypes.IDENTIFIER
+                    && (children[7].text == "get" || children[7].text == "set")
+        }
+
+        @JvmStatic
         fun isMain(element: PHPOpBlockName): Boolean = element.text == $$"$_main"
     }
 }

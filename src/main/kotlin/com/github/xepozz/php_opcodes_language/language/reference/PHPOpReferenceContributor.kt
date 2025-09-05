@@ -53,6 +53,11 @@ class PHPOpReferenceContributor : PsiReferenceContributor() {
                             PhpClassReference(element, TextRange(0, element.text.indexOf("::"))),
                             PhpClassMethodReference(element),
                         )
+                        element.isClassPropertyHook -> arrayOf(
+                            PhpClassReference(element, TextRange(0, element.text.indexOf("::"))),
+                            PhpClassPropertyHookReference(element, false),
+                            PhpClassPropertyHookReference(element, true),
+                        )
 
                         else -> PsiReference.EMPTY_ARRAY
                     }

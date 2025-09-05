@@ -1,0 +1,25 @@
+$_main:
+     ; (lines=2, args=0, vars=0, tmps=1)
+     ; (before optimizer)
+     ; /Users/xepozz/IdeaProjects/xepozz/php-opcodes-lang-plugin/playground/class-property-hooks.php:1-9
+     ; return  [] RANGE[0..0]
+0000 EXT_STMT
+0001 RETURN int(1)
+
+IdentifiableInterface::$id::get:
+     ; (lines=3, args=0, vars=0, tmps=1)
+     ; (before optimizer)
+     ; /Users/xepozz/IdeaProjects/xepozz/php-opcodes-lang-plugin/playground/class-property-hooks.php:6-6
+     ; return  [] RANGE[0..0]
+0000 EXT_STMT
+0001 VERIFY_RETURN_TYPE
+0002 RETURN null
+
+IdentifiableInterface::$id::set:
+     ; (lines=3, args=1, vars=1, tmps=1)
+     ; (before optimizer)
+     ; /Users/xepozz/IdeaProjects/xepozz/php-opcodes-lang-plugin/playground/class-property-hooks.php:7-7
+     ; return  [] RANGE[0..0]
+0000 CV0($value) = RECV 1
+0001 EXT_STMT
+0002 RETURN null

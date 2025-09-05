@@ -17,14 +17,13 @@ class DeclarationHandler : GotoDeclarationHandler {
         offset: Int,
         editor: Editor
     ): Array<out PsiElement> = ReadAction.compute<Array<out PsiElement>, Throwable> {
-        println("find targets for $sourceElement")
         val parent = sourceElement?.parent
         when (parent) {
             is PHPOpVarName -> findPHPVariableDefinitions(parent)
             is PHPOpLineNumber -> findLinesDefinitions(parent)
             is PHPOpParameter -> findZendVariableDefinitions(parent)
             else -> emptyArray()
-        }.apply { println("found targets: $this") }
+        }
     }
 
     private fun findPHPVariableDefinitions(sourceElement: PHPOpVarName): Array<PsiElement> {
