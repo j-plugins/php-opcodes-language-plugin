@@ -29,12 +29,17 @@ QUOTTED_STRING = "\""(\\\"|[^\"])*"\""
 
 LPAREN = "("
 RPAREN = ")"
+LBRACE = "{"
+RBRACE = "}"
+LBRACKET = "["
+RBRACKET = "]"
 DOLLAR_SIGN = "$"
 EQUALS_SIGN = "="
 COLON = ":"
 SLASH = "/"
+BACKSLASH = "\\"
 DASH = "-"
-THREE_DOTS = "..."
+DOT = "."
 
 %{
 private Stack<Integer> stack = new Stack<>();
@@ -57,16 +62,21 @@ public void yypopState() {
 <YYINITIAL> {
     {LPAREN}                                     { return PHPOpTypes.LPAREN; }
     {RPAREN}                                     { return PHPOpTypes.RPAREN; }
+    {LBRACE}                                     { return PHPOpTypes.LBRACE; }
+    {RBRACE}                                     { return PHPOpTypes.RBRACE; }
+    {LBRACKET}                                   { return PHPOpTypes.LBRACKET; }
+    {RBRACKET}                                   { return PHPOpTypes.RBRACKET; }
     {DOLLAR_SIGN}                                { return PHPOpTypes.DOLLAR_SIGN; }
     {EQUALS_SIGN}                                { return PHPOpTypes.EQUALS_SIGN; }
 
     {IDENTIFIER}                                 { return PHPOpTypes.IDENTIFIER; }
     {COLON}                                      { return PHPOpTypes.COLON; }
     {SLASH}                                      { return PHPOpTypes.SLASH; }
+    {BACKSLASH}                                  { return PHPOpTypes.BACKSLASH; }
+    {DOT}                                        { return PHPOpTypes.DOT; }
     {DASH}                                       { return PHPOpTypes.DASH; }
-    {THREE_DOTS}                                 { return PHPOpTypes.THREE_DOTS; }
     {NUMBER}                                     { return PHPOpTypes.NUMBER; }
-    {QUOTTED_STRING}                             { return PHPOpTypes.TEXT; }
+    {QUOTTED_STRING}                             { return PHPOpTypes.QUOTTED_STRING; }
 
     {WHITESPACE}                                 { return TokenType.WHITE_SPACE; }
     {NEWLINE}                                    { return PHPOpTypes.EOL; }

@@ -1,0 +1,20 @@
+$_main:
+     ; (lines=4, args=0, vars=1, tmps=3)
+     ; (before optimizer)
+     ; /Users/xepozz/IdeaProjects/xepozz/php-opcodes-lang-plugin/playground/closure-anon.phpo:1-4
+     ; return  [] RANGE[0..0]
+0000 EXT_STMT
+0001 T1 = DECLARE_LAMBDA_FUNCTION 0
+0002 ASSIGN CV0($a) T1
+0003 RETURN int(1)
+
+{closure:/Users/xepozz/IdeaProjects/xepozz/php-opcodes-lang-plugin/playground/closure-anon.phpo:3}:
+     ; (lines=5, args=0, vars=0, tmps=1)
+     ; (before optimizer)
+     ; /Users/xepozz/IdeaProjects/xepozz/php-opcodes-lang-plugin/playground/closure-anon.phpo:3-3
+     ; return  [] RANGE[0..0]
+0000 EXT_STMT
+0001 RETURN bool(true)
+0002 EXT_STMT
+0003 VERIFY_RETURN_TYPE
+0004 RETURN null

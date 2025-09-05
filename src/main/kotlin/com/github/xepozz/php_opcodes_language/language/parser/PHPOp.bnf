@@ -21,10 +21,16 @@
     NUMBER = "NUMBER"
     DOLLAR_SIGN = "DOLLAR_SIGN"
     EQUALS_SIGN = "EQUALS_SIGN"
-    TEXT = "TEXT"
+    QUOTTED_STRING = "QUOTTED_STRING"
     COLON = "COLON"
     DASH = "DASH"
-    THREE_DOTS = "THREE_DOTS"
+    SLASH = "SLASH"
+    BACKSLASH = "BACKSLASH"
+    DOT = "DOT"
+    LBRACE = "LBRACE"
+    RBRACE = "RBRACE"
+    LBRACKET = "LBRACKET"
+    RBRACKET = "RBRACKET"
   ]
 }
 
@@ -37,7 +43,7 @@ block ::= block_name COLON (statement | live_range | COMMENT | EOL)+
     pin=2
 }
 
-block_name ::= var_name | string_literal | method_name | function_name
+block_name ::= var_name | string_literal | method_name | function_name | closure_name
 {
     implements=["com.intellij.psi.NavigatablePsiElement" "com.intellij.psi.PsiNamedElement" "com.intellij.psi.PsiLiteralValue"]
     extends="com.github.xepozz.php_opcodes_language.language.psi.impl.PHPOpBlockNameBaseImpl"
@@ -50,6 +56,13 @@ private method_name ::= IDENTIFIER COLON COLON IDENTIFIER
 }
 
 private function_name ::= IDENTIFIER
+
+private closure_name ::= LBRACE 'closure' COLON path_absolute COLON NUMBER RBRACE
+{
+    pin=2
+}
+
+private path_absolute ::= (SLASH | BACKSLASH) (IDENTIFIER | DOT | SLASH | BACKSLASH | DASH)+
 
 statement ::= line_number (assignment_instruction | instruction)
 {
@@ -79,13 +92,13 @@ parameter ::= IDENTIFIER
     methods=[isVariable]
 }
 
-string_literal ::= TEXT
+string_literal ::= QUOTTED_STRING
 {
     implements=["com.intellij.psi.PsiLanguageInjectionHost" "com.intellij.psi.PsiLiteralValue"]
     extends="com.github.xepozz.php_opcodes_language.language.psi.impl.PHPOpStringLiteralBaseImpl"
 }
 
-private three_dots ::= THREE_DOTS
+private three_dots ::= DOT DOT DOT
 {
 }
 
