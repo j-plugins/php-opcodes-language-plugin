@@ -6,6 +6,21 @@ package com.github.xepozz.php_opcodes_language.language.documentation
 object OpcodesDictionary {
     private val directives = listOf(
         ParameterDoc(
+            name = "CV",
+            number = 0,
+            description = """CV-variable is a reference to user-defined named variable""",
+            // language=injectablephp
+            examplePhp = $$"""
+                <?php
+
+                return $a;
+            """.trimIndent(),
+            // language="PHP Opcodes"
+            exampleOpcode = $$"""
+                0000 RETURN CV0($a)
+            """.trimIndent(),
+        ),
+        ParameterDoc(
             name = "T",
             number = 0,
             description = """T-variable is a temporary variable, aimed to be pass the value between opcodes""",
@@ -13,14 +28,12 @@ object OpcodesDictionary {
             examplePhp = $$"""
                 <?php
 
-                return time() + 1;
+                return $a + $b;
             """.trimIndent(),
             // language="PHP Opcodes"
             exampleOpcode = $$"""
-                0000 INIT_FCALL 0 80 string("time")
-                0001 V1 = DO_ICALL
-                0002 T0 = ADD V1 int(1)
-                0003 RETURN T0
+                0000 T2 = ADD CV0($a) CV1($b)
+                0001 RETURN T2
             """.trimIndent(),
         ),
         ParameterDoc(
@@ -41,6 +54,28 @@ object OpcodesDictionary {
             """.trimIndent(),
         ),
         ParameterDoc(
+            name = "X",
+            number = 0,
+            description = """X-variable is a reference to a variable with a specific purpose""",
+            // language=injectablephp
+            examplePhp = $$"""
+                <?php
+
+                // There are no known ways to obtain
+                // it for this type of variable
+                //
+                // If you encounter such output, then you
+                // may send a PR with a code example that
+                // implements such behavior to add the
+                // example to this description:
+                //
+                //  - https://github.com/j-plugins/php-opcodes-language-plugin
+                //
+                // Thank You!
+                //
+            """.trimIndent(),
+        ),
+        ParameterDoc(
             name = "NOP",
             number = 0,
         ),
@@ -52,12 +87,11 @@ object OpcodesDictionary {
             examplePhp = $$"""
                 <?php
 
-                return $a + $b;
+                $a + $b;
             """.trimIndent(),
             // language="PHP Opcodes"
             exampleOpcode = $$"""
-                0000 T2 = ADD CV0($a) CV1($b)
-                0001 RETURN T2
+                0000 ADD CV0($a) CV1($b)
             """.trimIndent(),
         ),
         ParameterDoc(
@@ -68,12 +102,11 @@ object OpcodesDictionary {
             examplePhp = $$"""
                 <?php
 
-                return $a - $b;
+                $a - $b;
             """.trimIndent(),
             // language="PHP Opcodes"
             exampleOpcode = $$"""
-                0000 T2 = SUB CV0($a) CV1($b)
-                0001 RETURN T2
+                0000 SUB CV0($a) CV1($b)
             """.trimIndent(),
         ),
         ParameterDoc(
@@ -84,12 +117,11 @@ object OpcodesDictionary {
             examplePhp = $$"""
                 <?php
 
-                return $a * $b;
+                $a * $b;
             """.trimIndent(),
             // language="PHP Opcodes"
             exampleOpcode = $$"""
-                0000 T2 = MUL CV0($a) CV1($b)
-                0001 RETURN T2
+                0000 MUL CV0($a) CV1($b)
             """.trimIndent(),
         ),
         ParameterDoc(
@@ -100,12 +132,11 @@ object OpcodesDictionary {
             examplePhp = $$"""
                 <?php
 
-                return $a / $b;
+                $a / $b;
             """.trimIndent(),
             // language="PHP Opcodes"
             exampleOpcode = $$"""
-                0000 T2 = DIV CV0($a) CV1($b)
-                0001 RETURN T2
+                0000 DIV CV0($a) CV1($b)
             """.trimIndent(),
         ),
         ParameterDoc(
@@ -116,12 +147,11 @@ object OpcodesDictionary {
             examplePhp = $$"""
                 <?php
 
-                return $a % $b;
+                $a % $b;
             """.trimIndent(),
             // language="PHP Opcodes"
             exampleOpcode = $$"""
-                0000 T2 = MOD CV0($a) CV1($b)
-                0001 RETURN T2
+                0000 MOD CV0($a) CV1($b)
             """.trimIndent(),
         ),
         ParameterDoc(
@@ -132,12 +162,11 @@ object OpcodesDictionary {
             examplePhp = $$"""
                 <?php
 
-                return $a << $b;
+                $a << $b;
             """.trimIndent(),
             // language="PHP Opcodes"
             exampleOpcode = $$"""
-                0000 T2 = SL CV0($a) CV1($b)
-                0001 RETURN T2
+                0000 SL CV0($a) CV1($b)
             """.trimIndent(),
         ),
         ParameterDoc(
@@ -148,12 +177,11 @@ object OpcodesDictionary {
             examplePhp = $$"""
                 <?php
 
-                return $a >> $b;
+                $a >> $b;
             """.trimIndent(),
             // language="PHP Opcodes"
             exampleOpcode = $$"""
-                0000 T2 = SR CV0($a) CV1($b)
-                0001 RETURN T2
+                0000 SR CV0($a) CV1($b)
             """.trimIndent(),
         ),
         ParameterDoc(
@@ -164,12 +192,11 @@ object OpcodesDictionary {
             examplePhp = $$"""
                 <?php
 
-                return $a . $b;
+                $a . $b;
             """.trimIndent(),
             // language="PHP Opcodes"
             exampleOpcode = $$"""
-                0000 T2 = CONCAT CV0($a) CV1($b)
-                0001 RETURN T2
+                0000 CONCAT CV0($a) CV1($b)
             """.trimIndent(),
         ),
         ParameterDoc(
@@ -180,12 +207,11 @@ object OpcodesDictionary {
             examplePhp = $$"""
                 <?php
 
-                return $a | $b;
+                $a | $b;
             """.trimIndent(),
             // language="PHP Opcodes"
             exampleOpcode = $$"""
-                0000 T2 = BW_OR CV0($a) CV1($b)
-                0001 RETURN T2
+                0000 BW_OR CV0($a) CV1($b)
             """.trimIndent(),
         ),
         ParameterDoc(
@@ -196,12 +222,11 @@ object OpcodesDictionary {
             examplePhp = $$"""
                 <?php
 
-                return $a & $b;
+                $a & $b;
             """.trimIndent(),
             // language="PHP Opcodes"
             exampleOpcode = $$"""
-                0000 T2 = BW_AND CV0($a) CV1($b)
-                0001 RETURN T2
+                0000 BW_AND CV0($a) CV1($b)
             """.trimIndent(),
         ),
         ParameterDoc(
@@ -212,12 +237,11 @@ object OpcodesDictionary {
             examplePhp = $$"""
                 <?php
 
-                return $a ^ $b;
+                $a ^ $b;
             """.trimIndent(),
             // language="PHP Opcodes"
             exampleOpcode = $$"""
-                0000 T2 = BW_XOR CV0($a) CV1($b)
-                0001 RETURN T2
+                0000 BW_XOR CV0($a) CV1($b)
             """.trimIndent(),
         ),
         ParameterDoc(
@@ -228,12 +252,11 @@ object OpcodesDictionary {
             examplePhp = $$"""
                 <?php
 
-                return $a ** $b;
+                $a ** $b;
             """.trimIndent(),
             // language="PHP Opcodes"
             exampleOpcode = $$"""
-                0000 T2 = POW CV0($a) CV1($b)
-                0001 RETURN T2
+                0000 POW CV0($a) CV1($b)
             """.trimIndent(),
         ),
         ParameterDoc(
@@ -244,12 +267,11 @@ object OpcodesDictionary {
             examplePhp = $$"""
                 <?php
 
-                return ~$a;
+                ~$a;
             """.trimIndent(),
             // language="PHP Opcodes"
             exampleOpcode = $$"""
-                0000 T1 = BW_NOT CV0($a)
-                0001 RETURN T1
+                0000 BW_NOT CV0($a)
             """.trimIndent(),
         ),
         ParameterDoc(
@@ -260,12 +282,11 @@ object OpcodesDictionary {
             examplePhp = $$"""
                 <?php
 
-                return !$a;
+                !$a;
             """.trimIndent(),
             // language="PHP Opcodes"
             exampleOpcode = $$"""
-                0000 T1 = BOOL_NOT CV0($a)
-                0001 RETURN T1
+                0000 BOOL_NOT CV0($a)
             """.trimIndent(),
         ),
         ParameterDoc(
@@ -276,12 +297,11 @@ object OpcodesDictionary {
             examplePhp = $$"""
                 <?php
 
-                return $a xor $b;
+                $a xor $b;
             """.trimIndent(),
             // language="PHP Opcodes"
             exampleOpcode = $$"""
-                0000 T2 = BOOL_XOR CV0($a) CV1($b)
-                0001 RETURN T2
+                0000 BOOL_XOR CV0($a) CV1($b)
             """.trimIndent(),
         ),
         ParameterDoc(
@@ -292,12 +312,11 @@ object OpcodesDictionary {
             examplePhp = $$"""
                 <?php
 
-                return $a === $b;
+                $a === $b;
             """.trimIndent(),
             // language="PHP Opcodes"
             exampleOpcode = $$"""
-                0000 T2 = IS_IDENTICAL CV0($a) CV1($b)
-                0001 RETURN T2
+                0000 IS_IDENTICAL CV0($a) CV1($b)
             """.trimIndent(),
         ),
         ParameterDoc(
@@ -308,12 +327,11 @@ object OpcodesDictionary {
             examplePhp = $$"""
                 <?php
 
-                return $a !== $b;
+                $a !== $b;
             """.trimIndent(),
             // language="PHP Opcodes"
             exampleOpcode = $$"""
-                0000 T2 = IS_NOT_IDENTICAL CV0($a) CV1($b)
-                0001 RETURN T2
+                0000 IS_NOT_IDENTICAL CV0($a) CV1($b)
             """.trimIndent(),
         ),
         ParameterDoc(
@@ -324,12 +342,11 @@ object OpcodesDictionary {
             examplePhp = $$"""
                 <?php
 
-                return $a == $b;
+                $a == $b;
             """.trimIndent(),
             // language="PHP Opcodes"
             exampleOpcode = $$"""
-                0000 T2 = IS_EQUAL CV0($a) CV1($b)
-                0001 RETURN T2
+                0000 IS_EQUAL CV0($a) CV1($b)
             """.trimIndent(),
         ),
         ParameterDoc(
@@ -340,12 +357,11 @@ object OpcodesDictionary {
             examplePhp = $$"""
                 <?php
 
-                return $a != $b;
+                $a != $b;
             """.trimIndent(),
             // language="PHP Opcodes"
             exampleOpcode = $$"""
-                0000 T2 = IS_NOT_EQUAL CV0($a) CV1($b)
-                0001 RETURN T2
+                0000 IS_NOT_EQUAL CV0($a) CV1($b)
             """.trimIndent(),
         ),
         ParameterDoc(
@@ -356,12 +372,11 @@ object OpcodesDictionary {
             examplePhp = $$"""
                 <?php
 
-                return $a < $b;
+                $a < $b;
             """.trimIndent(),
             // language="PHP Opcodes"
             exampleOpcode = $$"""
-                0000 T2 = IS_SMALLER CV0($a) CV1($b)
-                0001 RETURN T2
+                0000 IS_SMALLER CV0($a) CV1($b)
             """.trimIndent(),
         ),
         ParameterDoc(
@@ -372,12 +387,11 @@ object OpcodesDictionary {
             examplePhp = $$"""
                 <?php
 
-                return $a <= $b;
+                $a <= $b;
             """.trimIndent(),
             // language="PHP Opcodes"
             exampleOpcode = $$"""
-                0000 T2 = IS_SMALLER_OR_EQUAL CV0($a) CV1($b)
-                0001 RETURN T2
+                0000 IS_SMALLER_OR_EQUAL CV0($a) CV1($b)
             """.trimIndent(),
         ),
         ParameterDoc(
@@ -388,12 +402,11 @@ object OpcodesDictionary {
             examplePhp = $$"""
                 <?php
 
-                return $a = 42;
+                $a = 42;
             """.trimIndent(),
             // language="PHP Opcodes"
             exampleOpcode = $$"""
-                0000 T1 = ASSIGN CV0($a) int(42)
-                0001 RETURN T1
+                0000 ASSIGN CV0($a) int(42)
             """.trimIndent(),
         ),
         ParameterDoc(
@@ -404,13 +417,12 @@ object OpcodesDictionary {
             examplePhp = $$"""
                 <?php
 
-                return $a[0] = 42;
+                $a[0] = 42;
             """.trimIndent(),
             // language="PHP Opcodes"
             exampleOpcode = $$"""
-                0000 T1 = ASSIGN_DIM CV0($a) int(0)
+                0000 ASSIGN_DIM CV0($a) int(0)
                 0001 OP_DATA int(42)
-                0002 RETURN T1
             """.trimIndent(),
         ),
         ParameterDoc(
@@ -421,13 +433,12 @@ object OpcodesDictionary {
             examplePhp = $$"""
                 <?php
 
-                return $a->property = 42;
+                $a->property = 42;
             """.trimIndent(),
             // language="PHP Opcodes"
             exampleOpcode = $$"""
-                0000 T1 = ASSIGN_OBJ CV0($a) string("property")
+                0000 ASSIGN_OBJ CV0($a) string("property")
                 0001 OP_DATA int(42)
-                0002 RETURN T1
             """.trimIndent(),
         ),
         ParameterDoc(
@@ -438,13 +449,12 @@ object OpcodesDictionary {
             examplePhp = $$"""
                 <?php
 
-                return Example::$property = 42;
+                Example::$property = 42;
             """.trimIndent(),
             // language="PHP Opcodes"
             exampleOpcode = $$"""
-                0000 T0 = ASSIGN_STATIC_PROP string("property") string("Example")
+                0000 ASSIGN_STATIC_PROP string("property") string("Example")
                 0001 OP_DATA int(42)
-                0002 RETURN T0
             """.trimIndent(),
         ),
         ParameterDoc(
@@ -464,7 +474,6 @@ object OpcodesDictionary {
                 0000 ASSIGN_OP (ADD) CV0($a) int(42)
                 0001 ASSIGN_OP (CONCAT) CV1($b) int(23)
                 0002 ASSIGN_OP (DIV) CV2($c) int(3735928559)
-                0003 RETURN int(1)
             """.trimIndent(),
         ),
         ParameterDoc(
@@ -485,7 +494,6 @@ object OpcodesDictionary {
                 0001 OP_DATA int(42)
                 0002 ASSIGN_DIM_OP (DIV) CV1($b) int(1)
                 0003 OP_DATA int(23)
-                0004 RETURN int(1)
             """.trimIndent(),
         ),
         ParameterDoc(
@@ -506,7 +514,6 @@ object OpcodesDictionary {
                 0001 OP_DATA int(42)
                 0002 ASSIGN_OBJ_OP (DIV) CV1($b) string("prop2")
                 0003 OP_DATA int(23)
-                0004 RETURN int(1)
             """.trimIndent(),
         ),
         ParameterDoc(
@@ -527,7 +534,6 @@ object OpcodesDictionary {
                 0001 OP_DATA int(42)
                 0002 ASSIGN_STATIC_PROP_OP (DIV) string("prop2") string("Example2")
                 0003 OP_DATA int(23)
-                0004 RETURN int(1)
             """.trimIndent(),
         ),
         ParameterDoc(
@@ -542,13 +548,27 @@ object OpcodesDictionary {
             """.trimIndent(),
             // language="PHP Opcodes"
             exampleOpcode = $$"""
-                0000 V2 = ASSIGN_REF CV0($a) CV1($b)
-                0001 RETURN V2
+                0000 ASSIGN_REF CV0($a) CV1($b)
             """.trimIndent(),
         ),
         ParameterDoc(
             name = "QM_ASSIGN",
             number = 31,
+            description = """Used to assign the result of a ternary operator to a variable""",
+            // language=injectablephp
+            examplePhp = $$"""
+                <?php
+
+                $a = $b ? 23 : 42;
+            """.trimIndent(),
+            // language="PHP Opcodes"
+            exampleOpcode = $$"""
+                0000 JMPZ CV1($b) 0003
+                0001 T2 = QM_ASSIGN int(23)
+                0002 JMP 0004
+                0003 T2 = QM_ASSIGN int(42)
+                0004 ASSIGN CV0($a) T2
+            """.trimIndent(),
         ),
         ParameterDoc(
             name = "ASSIGN_OBJ_REF",
