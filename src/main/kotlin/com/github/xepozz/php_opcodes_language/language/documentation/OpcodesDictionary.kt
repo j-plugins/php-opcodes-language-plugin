@@ -5540,7 +5540,7 @@ object OpcodesDictionary {
                 ;
             """.trimIndent(),
         ),
-    ).associateby{ it.name }
+    ).associateBy { it.name }
 
     fun getDocumentation(directiveName: String): ParameterDoc? {
         return directives[directiveName]
