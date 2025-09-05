@@ -255,50 +255,197 @@ object OpcodesDictionary {
         ParameterDoc(
             name = "BOOL_NOT",
             number = 14,
+            description = """Used for logical negation""",
+            // language=injectablephp
+            examplePhp = $$"""
+                <?php
+
+                return !$a;
+            """.trimIndent(),
+            // language="PHP Opcodes"
+            exampleOpcode = $$"""
+                0000 T1 = BOOL_NOT CV0($a)
+                0001 RETURN T1
+            """.trimIndent(),
         ),
         ParameterDoc(
             name = "BOOL_XOR",
             number = 15,
+            description = """Used for logical "XOR" operations""",
+            // language=injectablephp
+            examplePhp = $$"""
+                <?php
+
+                return $a xor $b;
+            """.trimIndent(),
+            // language="PHP Opcodes"
+            exampleOpcode = $$"""
+                0000 T2 = BOOL_XOR CV0($a) CV1($b)
+                0001 RETURN T2
+            """.trimIndent(),
         ),
         ParameterDoc(
             name = "IS_IDENTICAL",
             number = 16,
+            description = """Used for logical strict identity comparison""",
+            // language=injectablephp
+            examplePhp = $$"""
+                <?php
+
+                return $a === $b;
+            """.trimIndent(),
+            // language="PHP Opcodes"
+            exampleOpcode = $$"""
+                0000 T2 = IS_IDENTICAL CV0($a) CV1($b)
+                0001 RETURN T2
+            """.trimIndent(),
         ),
         ParameterDoc(
             name = "IS_NOT_IDENTICAL",
             number = 17,
+            description = """Used for logical strict comparison of non-identity""",
+            // language=injectablephp
+            examplePhp = $$"""
+                <?php
+
+                return $a !== $b;
+            """.trimIndent(),
+            // language="PHP Opcodes"
+            exampleOpcode = $$"""
+                0000 T2 = IS_NOT_IDENTICAL CV0($a) CV1($b)
+                0001 RETURN T2
+            """.trimIndent(),
         ),
         ParameterDoc(
             name = "IS_EQUAL",
             number = 18,
+            description = """Used for logical non-strict equivalence comparison""",
+            // language=injectablephp
+            examplePhp = $$"""
+                <?php
+
+                return $a == $b;
+            """.trimIndent(),
+            // language="PHP Opcodes"
+            exampleOpcode = $$"""
+                0000 T2 = IS_EQUAL CV0($a) CV1($b)
+                0001 RETURN T2
+            """.trimIndent(),
         ),
         ParameterDoc(
             name = "IS_NOT_EQUAL",
             number = 19,
+            description = """Used for logical non-strict comparison of non-equivalence""",
+            // language=injectablephp
+            examplePhp = $$"""
+                <?php
+
+                return $a != $b;
+            """.trimIndent(),
+            // language="PHP Opcodes"
+            exampleOpcode = $$"""
+                0000 T2 = IS_NOT_EQUAL CV0($a) CV1($b)
+                0001 RETURN T2
+            """.trimIndent(),
         ),
         ParameterDoc(
             name = "IS_SMALLER",
             number = 20,
+            description = """Used for logical "less than" comparison""",
+            // language=injectablephp
+            examplePhp = $$"""
+                <?php
+
+                return $a < $b;
+            """.trimIndent(),
+            // language="PHP Opcodes"
+            exampleOpcode = $$"""
+                0000 T2 = IS_SMALLER CV0($a) CV1($b)
+                0001 RETURN T2
+            """.trimIndent(),
         ),
         ParameterDoc(
             name = "IS_SMALLER_OR_EQUAL",
             number = 21,
+            description = """Used for logical "less than or equal" comparison""",
+            // language=injectablephp
+            examplePhp = $$"""
+                <?php
+
+                return $a <= $b;
+            """.trimIndent(),
+            // language="PHP Opcodes"
+            exampleOpcode = $$"""
+                0000 T2 = IS_SMALLER_OR_EQUAL CV0($a) CV1($b)
+                0001 RETURN T2
+            """.trimIndent(),
         ),
         ParameterDoc(
             name = "ASSIGN",
             number = 22,
+            description = """Used to assign a value to a variable""",
+            // language=injectablephp
+            examplePhp = $$"""
+                <?php
+
+                return $a = 42;
+            """.trimIndent(),
+            // language="PHP Opcodes"
+            exampleOpcode = $$"""
+                0000 T1 = ASSIGN CV0($a) int(42)
+                0001 RETURN T1
+            """.trimIndent(),
         ),
         ParameterDoc(
             name = "ASSIGN_DIM",
             number = 23,
+            description = """Used to select an array element for further assignment of a value""",
+            // language=injectablephp
+            examplePhp = $$"""
+                <?php
+
+                return $a[0] = 42;
+            """.trimIndent(),
+            // language="PHP Opcodes"
+            exampleOpcode = $$"""
+                0000 T1 = ASSIGN_DIM CV0($a) int(0)
+                0001 OP_DATA int(42)
+                0002 RETURN T1
+            """.trimIndent(),
         ),
         ParameterDoc(
             name = "ASSIGN_OBJ",
             number = 24,
+            description = """Used to select an object's property for further assignment of a value""",
+            // language=injectablephp
+            examplePhp = $$"""
+                <?php
+
+                return $a->property = 42;
+            """.trimIndent(),
+            // language="PHP Opcodes"
+            exampleOpcode = $$"""
+                0000 T1 = ASSIGN_OBJ CV0($a) string("property")
+                0001 OP_DATA int(42)
+                0002 RETURN T1
+            """.trimIndent(),
         ),
         ParameterDoc(
             name = "ASSIGN_STATIC_PROP",
             number = 25,
+            description = """Used to select a static property of a class for further assignment of a value to it""",
+            // language=injectablephp
+            examplePhp = $$"""
+                <?php
+
+                return Example::$property = 42;
+            """.trimIndent(),
+            // language="PHP Opcodes"
+            exampleOpcode = $$"""
+                0000 T0 = ASSIGN_STATIC_PROP string("property") string("Example")
+                0001 OP_DATA int(42)
+                0002 RETURN T0
+            """.trimIndent(),
         ),
         ParameterDoc(
             name = "ASSIGN_OP",
