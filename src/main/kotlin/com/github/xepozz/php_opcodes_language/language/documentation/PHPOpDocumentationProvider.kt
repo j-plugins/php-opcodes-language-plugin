@@ -24,27 +24,50 @@ class PHPOpDocumentationProvider : AbstractDocumentationProvider() {
             val directiveName =
                 if (element.isVariable) element.text.trimEnd { it.isDigit() } else element.text.toString()
             val doc = OpcodesDictionary.getDocumentation(directiveName) ?: return null
+
             val highlighter = CodeBlockHtmlSyntaxHighlighter(element.project)
 
             buildString {
-                append("<div class='definition'><pre>")
-                append(doc.name)
-                append("</pre></div>")
+                append("<div class='definition'>")
+                append("<pre><b>Name</b>: ${doc.name}</pre>")
+                if (doc.number >= 0) {
+                    append("<pre><b>Number</b>: ${doc.number}</pre>")
+                }
+                append("</div>")
 
                 append("<div class='content'>")
-                append("<p>${doc.description}</p>")
+                if (doc.description != null) {
+                    append("<p>${doc.description}</p>")
+                } else {
+                    append("<p class='grayed'>No description provided</p>")
+                }
 
                 if (doc.examplePhp != null) {
-                    append("<h3>Example PHP</h3>")
-                    append("<pre>${highlighter.color("InjectablePHP", doc.examplePhp)}</pre>")
+                    append("<p>Example PHP</p>")
+                    append("<pre>")
+                    append(highlighter.color("InjectablePHP", "<?php\n"))
+                    append(highlighter.color("InjectablePHP", doc.examplePhp))
+                    append("</pre>")
+                } else {
+                    append("<p class='grayed'>No PHP example provided</p>")
                 }
 
                 if (doc.exampleOpcode != null) {
-                    append("<h3>Example Opcodes</h3>")
-                    append("<pre>")
+                    append("<p>Example Opcodes</p>")
                     append("<pre>${highlighter.color("PHP Opcodes", doc.exampleOpcode)}</pre>")
-                    append("</pre>")
+                } else {
+                    append("<p class='grayed'>No Opcodes example provided</p>")
                 }
+
+                append("</div>")
+
+                append("<div class='content'>")
+
+                append("<p class='grayed'>")
+                append("Improve the documentation by submitting a pull request to the ")
+                append("<a href='https://github.com/j-plugins/php-opcodes-language-plugin'>repository</a>")
+                append("</p>")
+
 
                 append("</div>")
             }
