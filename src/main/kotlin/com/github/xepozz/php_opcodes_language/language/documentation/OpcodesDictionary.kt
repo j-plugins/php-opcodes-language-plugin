@@ -450,22 +450,101 @@ object OpcodesDictionary {
         ParameterDoc(
             name = "ASSIGN_OP",
             number = 26,
+            description = """Used to assign the results of an operation to the first operand""",
+            // language=injectablephp
+            examplePhp = $$"""
+                <?php
+
+                $a += 42;
+                $b .= 23;
+                $c /= 0xDEAD_BEEF;
+            """.trimIndent(),
+            // language="PHP Opcodes"
+            exampleOpcode = $$"""
+                0000 ASSIGN_OP (ADD) CV0($a) int(42)
+                0001 ASSIGN_OP (CONCAT) CV1($b) int(23)
+                0002 ASSIGN_OP (DIV) CV2($c) int(3735928559)
+                0003 RETURN int(1)
+            """.trimIndent(),
         ),
         ParameterDoc(
             name = "ASSIGN_DIM_OP",
             number = 27,
+            description = """Used to select an array element for further assignment of the operation result to it""",
+            // language=injectablephp
+            examplePhp = $$"""
+                <?php
+
+                $a[0] += 42;
+
+                $b[1] /= 23;
+            """.trimIndent(),
+            // language="PHP Opcodes"
+            exampleOpcode = $$"""
+                0000 ASSIGN_DIM_OP (ADD) CV0($a) int(0)
+                0001 OP_DATA int(42)
+                0002 ASSIGN_DIM_OP (DIV) CV1($b) int(1)
+                0003 OP_DATA int(23)
+                0004 RETURN int(1)
+            """.trimIndent(),
         ),
         ParameterDoc(
             name = "ASSIGN_OBJ_OP",
             number = 28,
+            description = """Used to select an object property for further assignment of the operation result to it""",
+            // language=injectablephp
+            examplePhp = $$"""
+                <?php
+
+                $a->prop1 += 42;
+
+                $b->prop2 /= 23;
+            """.trimIndent(),
+            // language="PHP Opcodes"
+            exampleOpcode = $$"""
+                0000 ASSIGN_OBJ_OP (ADD) CV0($a) string("prop1")
+                0001 OP_DATA int(42)
+                0002 ASSIGN_OBJ_OP (DIV) CV1($b) string("prop2")
+                0003 OP_DATA int(23)
+                0004 RETURN int(1)
+            """.trimIndent(),
         ),
         ParameterDoc(
             name = "ASSIGN_STATIC_PROP_OP",
             number = 29,
+            description = """Used to select a class static property for further assignment of the operation result to it""",
+            // language=injectablephp
+            examplePhp = $$"""
+                <?php
+
+                Example1::$prop1 += 42;
+
+                Example2::$prop2 /= 23;
+            """.trimIndent(),
+            // language="PHP Opcodes"
+            exampleOpcode = $$"""
+                0000 ASSIGN_STATIC_PROP_OP (ADD) string("prop1") string("Example1")
+                0001 OP_DATA int(42)
+                0002 ASSIGN_STATIC_PROP_OP (DIV) string("prop2") string("Example2")
+                0003 OP_DATA int(23)
+                0004 RETURN int(1)
+            """.trimIndent(),
         ),
         ParameterDoc(
             name = "ASSIGN_REF",
             number = 30,
+            description = """Used to assign a reference to a variable""",
+            // language=injectablephp
+            examplePhp = $$"""
+                <?php
+
+                $a = &$b;
+            """.trimIndent(),
+            // language="PHP Opcodes"
+            exampleOpcode = $$"""
+                0000 V2 = ASSIGN_REF CV0($a) CV1($b)
+                0001 RETURN V2
+            """.trimIndent(),
         ),
         ParameterDoc(
             name = "QM_ASSIGN",
