@@ -7,7 +7,7 @@ object OpcodesDictionary {
     private val directives = listOf(
         ParameterDoc(
             name = "T",
-            number = 0
+            number = 0,,
             description = """T-variable is a temporary variable, aimed to be pass the value between opcodes""",
             // language=injectablephp
             examplePhp = $$"""
@@ -25,7 +25,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "V",
-            number = 0
+            number = 0,,
             description = """V-variable is a temporary variable, aimed to hold value of the called function""",
             // language=injectablephp
             examplePhp = $$"""
@@ -42,7 +42,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "NOP",
-            number = 0
+            number = 0,,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -69,7 +69,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "ADD",
-            number = 1
+            number = 1,
             description = """Used for addition operations""",
             // language=injectablephp
             examplePhp = $$"""
@@ -85,7 +85,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "SUB",
-            number = 2
+            number = 2,
             description = """Used for subtraction operations""",
             // language=injectablephp
             examplePhp = $$"""
@@ -101,7 +101,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "MUL",
-            number = 3
+            number = 3,
             description = """Used for multiply operations""",
             // language=injectablephp
             examplePhp = $$"""
@@ -117,7 +117,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "DIV",
-            number = 4
+            number = 4,
             description = """Used for division operations""",
             // language=injectablephp
             examplePhp = $$"""
@@ -133,7 +133,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "MOD",
-            number = 5
+            number = 5,
             description = """Used for modulo operations""",
             // language=injectablephp
             examplePhp = $$"""
@@ -149,7 +149,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "SL",
-            number = 6
+            number = 6,
             description = """Used for bitwise left shift operations""",
             // language=injectablephp
             examplePhp = $$"""
@@ -165,7 +165,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "SR",
-            number = 7
+            number = 7,
             description = """Used for bitwise right shift operations""",
             // language=injectablephp
             examplePhp = $$"""
@@ -181,7 +181,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "CONCAT",
-            number = 8
+            number = 8,
             description = """Used for concatenation operations""",
             // language=injectablephp
             examplePhp = $$"""
@@ -197,7 +197,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "BW_OR",
-            number = 9
+            number = 9,
             description = """Used for bitwise "OR" operations""",
             // language=injectablephp
             examplePhp = $$"""
@@ -213,7 +213,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "BW_AND",
-            number = 10
+            number = 10,
             description = """Used for bitwise "AND" operations""",
             // language=injectablephp
             examplePhp = $$"""
@@ -229,7 +229,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "BW_XOR",
-            number = 11
+            number = 11,
             description = """Used for bitwise "XOR" operations""",
             // language=injectablephp
             examplePhp = $$"""
@@ -245,7 +245,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "POW",
-            number = 12
+            number = 12,
             description = """Used for exponentiation operations""",
             // language=injectablephp
             examplePhp = $$"""
@@ -261,7 +261,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "BW_NOT",
-            number = 13
+            number = 13,
             description = """Used to perform bit reversal operations in a number""",
             // language=injectablephp
             examplePhp = $$"""
@@ -277,7 +277,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "BOOL_NOT",
-            number = 14
+            number = 14,
             description = """**description is currently unavailable**""",
             // language=injectablephp
             examplePhp = $$"""
@@ -304,7 +304,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "BOOL_XOR",
-            number = 15
+            number = 15,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -331,7 +331,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "IS_IDENTICAL",
-            number = 16
+            number = 16,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -358,7 +358,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "IS_NOT_IDENTICAL",
-            number = 17
+            number = 17,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -385,7 +385,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "IS_EQUAL",
-            number = 18
+            number = 18,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -412,7 +412,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "IS_NOT_EQUAL",
-            number = 19
+            number = 19,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -439,7 +439,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "IS_SMALLER",
-            number = 20
+            number = 20,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -466,7 +466,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "IS_SMALLER_OR_EQUAL",
-            number = 21
+            number = 21,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -493,7 +493,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "ASSIGN",
-            number = 22
+            number = 22,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -520,7 +520,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "ASSIGN_DIM",
-            number = 23
+            number = 23,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -547,7 +547,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "ASSIGN_OBJ",
-            number = 24
+            number = 24,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -574,7 +574,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "ASSIGN_STATIC_PROP",
-            number = 25
+            number = 25,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -601,7 +601,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "ASSIGN_OP",
-            number = 26
+            number = 26,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -628,7 +628,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "ASSIGN_DIM_OP",
-            number = 27
+            number = 27,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -655,7 +655,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "ASSIGN_OBJ_OP",
-            number = 28
+            number = 28,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -682,7 +682,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "ASSIGN_STATIC_PROP_OP",
-            number = 29
+            number = 29,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -709,7 +709,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "ASSIGN_REF",
-            number = 30
+            number = 30,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -736,7 +736,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "QM_ASSIGN",
-            number = 31
+            number = 31,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -763,7 +763,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "ASSIGN_OBJ_REF",
-            number = 32
+            number = 32,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -790,7 +790,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "ASSIGN_STATIC_PROP_REF",
-            number = 33
+            number = 33,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -817,7 +817,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "PRE_INC",
-            number = 34
+            number = 34,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -844,7 +844,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "PRE_DEC",
-            number = 35
+            number = 35,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -871,7 +871,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "POST_INC",
-            number = 36
+            number = 36,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -898,7 +898,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "POST_DEC",
-            number = 37
+            number = 37,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -925,7 +925,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "PRE_INC_STATIC_PROP",
-            number = 38
+            number = 38,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -952,7 +952,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "PRE_DEC_STATIC_PROP",
-            number = 39
+            number = 39,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -979,7 +979,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "POST_INC_STATIC_PROP",
-            number = 40
+            number = 40,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -1006,7 +1006,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "POST_DEC_STATIC_PROP",
-            number = 41
+            number = 41,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -1033,7 +1033,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "JMP",
-            number = 42
+            number = 42,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -1060,7 +1060,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "JMPZ",
-            number = 43
+            number = 43,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -1087,7 +1087,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "JMPNZ",
-            number = 44
+            number = 44,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -1114,7 +1114,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "JMPZ_EX",
-            number = 46
+            number = 46,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -1141,7 +1141,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "JMPNZ_EX",
-            number = 47
+            number = 47,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -1168,7 +1168,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "CASE",
-            number = 48
+            number = 48,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -1195,7 +1195,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "CHECK_VAR",
-            number = 49
+            number = 49,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -1222,7 +1222,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "SEND_VAR_NO_REF_EX",
-            number = 50
+            number = 50,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -1249,7 +1249,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "CAST",
-            number = 51
+            number = 51,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -1276,7 +1276,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "BOOL",
-            number = 52
+            number = 52,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -1303,7 +1303,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FAST_CONCAT",
-            number = 53
+            number = 53,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -1330,7 +1330,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "ROPE_INIT",
-            number = 54
+            number = 54,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -1357,7 +1357,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "ROPE_ADD",
-            number = 55
+            number = 55,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -1384,7 +1384,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "ROPE_END",
-            number = 56
+            number = 56,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -1411,7 +1411,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "BEGIN_SILENCE",
-            number = 57
+            number = 57,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -1438,7 +1438,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "END_SILENCE",
-            number = 58
+            number = 58,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -1465,7 +1465,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "INIT_FCALL_BY_NAME",
-            number = 59
+            number = 59,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -1492,7 +1492,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "DO_FCALL",
-            number = 60
+            number = 60,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -1519,7 +1519,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "INIT_FCALL",
-            number = 61
+            number = 61,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -1546,7 +1546,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "RETURN",
-            number = 62
+            number = 62,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -1573,7 +1573,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "RECV",
-            number = 63
+            number = 63,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -1600,7 +1600,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "RECV_INIT",
-            number = 64
+            number = 64,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -1627,7 +1627,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "SEND_VAL",
-            number = 65
+            number = 65,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -1654,7 +1654,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "SEND_VAR_EX",
-            number = 66
+            number = 66,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -1681,7 +1681,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "SEND_REF",
-            number = 67
+            number = 67,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -1708,7 +1708,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "NEW",
-            number = 68
+            number = 68,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -1735,7 +1735,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "INIT_NS_FCALL_BY_NAME",
-            number = 69
+            number = 69,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -1762,7 +1762,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FREE",
-            number = 70
+            number = 70,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -1789,7 +1789,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "INIT_ARRAY",
-            number = 71
+            number = 71,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -1816,7 +1816,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "ADD_ARRAY_ELEMENT",
-            number = 72
+            number = 72,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -1843,7 +1843,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "INCLUDE_OR_EVAL",
-            number = 73
+            number = 73,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -1870,7 +1870,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "UNSET_VAR",
-            number = 74
+            number = 74,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -1897,7 +1897,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "UNSET_DIM",
-            number = 75
+            number = 75,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -1924,7 +1924,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "UNSET_OBJ",
-            number = 76
+            number = 76,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -1951,7 +1951,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FE_RESET_R",
-            number = 77
+            number = 77,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -1978,7 +1978,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FE_FETCH_R",
-            number = 78
+            number = 78,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -2005,7 +2005,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FETCH_R",
-            number = 80
+            number = 80,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -2032,7 +2032,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FETCH_DIM_R",
-            number = 81
+            number = 81,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -2059,7 +2059,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FETCH_OBJ_R",
-            number = 82
+            number = 82,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -2086,7 +2086,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FETCH_W",
-            number = 83
+            number = 83,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -2113,7 +2113,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FETCH_DIM_W",
-            number = 84
+            number = 84,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -2140,7 +2140,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FETCH_OBJ_W",
-            number = 85
+            number = 85,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -2167,7 +2167,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FETCH_RW",
-            number = 86
+            number = 86,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -2194,7 +2194,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FETCH_DIM_RW",
-            number = 87
+            number = 87,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -2221,7 +2221,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FETCH_OBJ_RW",
-            number = 88
+            number = 88,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -2248,7 +2248,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FETCH_IS",
-            number = 89
+            number = 89,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -2275,7 +2275,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FETCH_DIM_IS",
-            number = 90
+            number = 90,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -2302,7 +2302,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FETCH_OBJ_IS",
-            number = 91
+            number = 91,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -2329,7 +2329,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FETCH_FUNC_ARG",
-            number = 92
+            number = 92,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -2356,7 +2356,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FETCH_DIM_FUNC_ARG",
-            number = 93
+            number = 93,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -2383,7 +2383,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FETCH_OBJ_FUNC_ARG",
-            number = 94
+            number = 94,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -2410,7 +2410,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FETCH_UNSET",
-            number = 95
+            number = 95,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -2437,7 +2437,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FETCH_DIM_UNSET",
-            number = 96
+            number = 96,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -2464,7 +2464,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FETCH_OBJ_UNSET",
-            number = 97
+            number = 97,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -2491,7 +2491,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FETCH_LIST_R",
-            number = 98
+            number = 98,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -2518,7 +2518,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FETCH_CONSTANT",
-            number = 99
+            number = 99,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -2545,7 +2545,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "CHECK_FUNC_ARG",
-            number = 100
+            number = 100,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -2572,7 +2572,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "EXT_STMT",
-            number = 101
+            number = 101,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -2599,7 +2599,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "EXT_FCALL_BEGIN",
-            number = 102
+            number = 102,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -2626,7 +2626,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "EXT_FCALL_END",
-            number = 103
+            number = 103,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -2653,7 +2653,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "EXT_NOP",
-            number = 104
+            number = 104,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -2680,7 +2680,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "TICKS",
-            number = 105
+            number = 105,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -2707,7 +2707,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "SEND_VAR_NO_REF",
-            number = 106
+            number = 106,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -2734,7 +2734,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "CATCH",
-            number = 107
+            number = 107,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -2761,7 +2761,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "THROW",
-            number = 108
+            number = 108,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -2788,7 +2788,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FETCH_CLASS",
-            number = 109
+            number = 109,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -2815,7 +2815,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "CLONE",
-            number = 110
+            number = 110,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -2842,7 +2842,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "RETURN_BY_REF",
-            number = 111
+            number = 111,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -2869,7 +2869,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "INIT_METHOD_CALL",
-            number = 112
+            number = 112,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -2896,7 +2896,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "INIT_STATIC_METHOD_CALL",
-            number = 113
+            number = 113,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -2923,7 +2923,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "ISSET_ISEMPTY_VAR",
-            number = 114
+            number = 114,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -2950,7 +2950,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "ISSET_ISEMPTY_DIM_OBJ",
-            number = 115
+            number = 115,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -2977,7 +2977,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "SEND_VAL_EX",
-            number = 116
+            number = 116,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -3004,7 +3004,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "SEND_VAR",
-            number = 117
+            number = 117,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -3031,7 +3031,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "INIT_USER_CALL",
-            number = 118
+            number = 118,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -3058,7 +3058,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "SEND_ARRAY",
-            number = 119
+            number = 119,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -3085,7 +3085,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "SEND_USER",
-            number = 120
+            number = 120,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -3112,7 +3112,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "STRLEN",
-            number = 121
+            number = 121,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -3139,7 +3139,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "DEFINED",
-            number = 122
+            number = 122,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -3166,7 +3166,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "TYPE_CHECK",
-            number = 123
+            number = 123,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -3193,7 +3193,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "VERIFY_RETURN_TYPE",
-            number = 124
+            number = 124,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -3220,7 +3220,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FE_RESET_RW",
-            number = 125
+            number = 125,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -3247,7 +3247,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FE_FETCH_RW",
-            number = 126
+            number = 126,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -3274,7 +3274,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FE_FREE",
-            number = 127
+            number = 127,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -3301,7 +3301,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "INIT_DYNAMIC_CALL",
-            number = 128
+            number = 128,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -3328,7 +3328,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "DO_ICALL",
-            number = 129
+            number = 129,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -3355,7 +3355,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "DO_UCALL",
-            number = 130
+            number = 130,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -3382,7 +3382,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "DO_FCALL_BY_NAME",
-            number = 131
+            number = 131,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -3409,7 +3409,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "PRE_INC_OBJ",
-            number = 132
+            number = 132,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -3436,7 +3436,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "PRE_DEC_OBJ",
-            number = 133
+            number = 133,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -3463,7 +3463,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "POST_INC_OBJ",
-            number = 134
+            number = 134,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -3490,7 +3490,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "POST_DEC_OBJ",
-            number = 135
+            number = 135,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -3517,7 +3517,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "ECHO",
-            number = 136
+            number = 136,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -3544,7 +3544,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "OP_DATA",
-            number = 137
+            number = 137,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -3571,7 +3571,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "INSTANCEOF",
-            number = 138
+            number = 138,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -3598,7 +3598,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "GENERATOR_CREATE",
-            number = 139
+            number = 139,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -3625,7 +3625,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "MAKE_REF",
-            number = 140
+            number = 140,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -3652,7 +3652,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "DECLARE_FUNCTION",
-            number = 141
+            number = 141,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -3679,7 +3679,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "DECLARE_LAMBDA_FUNCTION",
-            number = 142
+            number = 142,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -3706,7 +3706,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "DECLARE_CONST",
-            number = 143
+            number = 143,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -3733,7 +3733,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "DECLARE_CLASS",
-            number = 144
+            number = 144,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -3760,7 +3760,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "DECLARE_CLASS_DELAYED",
-            number = 145
+            number = 145,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -3787,7 +3787,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "DECLARE_ANON_CLASS",
-            number = 146
+            number = 146,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -3814,7 +3814,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "ADD_ARRAY_UNPACK",
-            number = 147
+            number = 147,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -3841,7 +3841,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "ISSET_ISEMPTY_PROP_OBJ",
-            number = 148
+            number = 148,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -3868,7 +3868,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "HANDLE_EXCEPTION",
-            number = 149
+            number = 149,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -3895,7 +3895,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "USER_OPCODE",
-            number = 150
+            number = 150,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -3922,7 +3922,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "ASSERT_CHECK",
-            number = 151
+            number = 151,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -3949,7 +3949,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "JMP_SET",
-            number = 152
+            number = 152,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -3976,7 +3976,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "UNSET_CV",
-            number = 153
+            number = 153,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -4003,7 +4003,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "ISSET_ISEMPTY_CV",
-            number = 154
+            number = 154,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -4030,7 +4030,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FETCH_LIST_W",
-            number = 155
+            number = 155,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -4057,7 +4057,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "SEPARATE",
-            number = 156
+            number = 156,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -4084,7 +4084,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FETCH_CLASS_NAME",
-            number = 157
+            number = 157,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -4111,7 +4111,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "CALL_TRAMPOLINE",
-            number = 158
+            number = 158,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -4138,7 +4138,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "DISCARD_EXCEPTION",
-            number = 159
+            number = 159,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -4165,7 +4165,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "YIELD",
-            number = 160
+            number = 160,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -4192,7 +4192,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "GENERATOR_RETURN",
-            number = 161
+            number = 161,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -4219,7 +4219,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FAST_CALL",
-            number = 162
+            number = 162,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -4246,7 +4246,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FAST_RET",
-            number = 163
+            number = 163,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -4273,7 +4273,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "RECV_VARIADIC",
-            number = 164
+            number = 164,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -4300,7 +4300,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "SEND_UNPACK",
-            number = 165
+            number = 165,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -4327,7 +4327,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "YIELD_FROM",
-            number = 166
+            number = 166,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -4354,7 +4354,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "COPY_TMP",
-            number = 167
+            number = 167,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -4381,7 +4381,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "BIND_GLOBAL",
-            number = 168
+            number = 168,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -4408,7 +4408,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "COALESCE",
-            number = 169
+            number = 169,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -4435,7 +4435,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "SPACESHIP",
-            number = 170
+            number = 170,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -4462,7 +4462,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FUNC_NUM_ARGS",
-            number = 171
+            number = 171,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -4489,7 +4489,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FUNC_GET_ARGS",
-            number = 172
+            number = 172,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -4516,7 +4516,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FETCH_STATIC_PROP_R",
-            number = 173
+            number = 173,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -4543,7 +4543,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FETCH_STATIC_PROP_W",
-            number = 174
+            number = 174,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -4570,7 +4570,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FETCH_STATIC_PROP_RW",
-            number = 175
+            number = 175,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -4597,7 +4597,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FETCH_STATIC_PROP_IS",
-            number = 176
+            number = 176,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -4624,7 +4624,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FETCH_STATIC_PROP_FUNC_ARG",
-            number = 177
+            number = 177,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -4651,7 +4651,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FETCH_STATIC_PROP_UNSET",
-            number = 178
+            number = 178,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -4678,7 +4678,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "UNSET_STATIC_PROP",
-            number = 179
+            number = 179,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -4705,7 +4705,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "ISSET_ISEMPTY_STATIC_PROP",
-            number = 180
+            number = 180,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -4732,7 +4732,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FETCH_CLASS_CONSTANT",
-            number = 181
+            number = 181,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -4759,7 +4759,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "BIND_LEXICAL",
-            number = 182
+            number = 182,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -4786,7 +4786,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "BIND_STATIC",
-            number = 183
+            number = 183,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -4813,7 +4813,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FETCH_THIS",
-            number = 184
+            number = 184,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -4840,7 +4840,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "SEND_FUNC_ARG",
-            number = 185
+            number = 185,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -4867,7 +4867,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "ISSET_ISEMPTY_THIS",
-            number = 186
+            number = 186,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -4894,7 +4894,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "SWITCH_LONG",
-            number = 187
+            number = 187,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -4921,7 +4921,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "SWITCH_STRING",
-            number = 188
+            number = 188,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -4948,7 +4948,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "IN_ARRAY",
-            number = 189
+            number = 189,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -4975,7 +4975,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "COUNT",
-            number = 190
+            number = 190,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -5002,7 +5002,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "GET_CLASS",
-            number = 191
+            number = 191,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -5029,7 +5029,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "GET_CALLED_CLASS",
-            number = 192
+            number = 192,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -5056,7 +5056,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "GET_TYPE",
-            number = 193
+            number = 193,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -5083,7 +5083,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "ARRAY_KEY_EXISTS",
-            number = 194
+            number = 194,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -5110,7 +5110,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "MATCH",
-            number = 195
+            number = 195,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -5137,7 +5137,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "CASE_STRICT",
-            number = 196
+            number = 196,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -5164,7 +5164,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "MATCH_ERROR",
-            number = 197
+            number = 197,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -5191,7 +5191,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "JMP_NULL",
-            number = 198
+            number = 198,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -5218,7 +5218,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "CHECK_UNDEF_ARGS",
-            number = 199
+            number = 199,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -5245,7 +5245,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FETCH_GLOBALS",
-            number = 200
+            number = 200,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -5272,7 +5272,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "VERIFY_NEVER_TYPE",
-            number = 201
+            number = 201,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -5299,7 +5299,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "CALLABLE_CONVERT",
-            number = 202
+            number = 202,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -5326,7 +5326,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "BIND_INIT_STATIC_OR_JMP",
-            number = 203
+            number = 203,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -5353,7 +5353,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FRAMELESS_ICALL_0",
-            number = 204
+            number = 204,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -5380,7 +5380,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FRAMELESS_ICALL_1",
-            number = 205
+            number = 205,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -5407,7 +5407,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FRAMELESS_ICALL_2",
-            number = 206
+            number = 206,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -5434,7 +5434,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "FRAMELESS_ICALL_3",
-            number = 207
+            number = 207,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -5461,7 +5461,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "JMP_FRAMELESS",
-            number = 208
+            number = 208,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -5488,7 +5488,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "INIT_PARENT_PROPERTY_HOOK_CALL",
-            number = 209
+            number = 209,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
@@ -5515,7 +5515,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "DECLARE_ATTRIBUTED_CONST",
-            number = 210
+            number = 210,
             description = ,
             // language=injectablephp
             examplePhp = $$"""
