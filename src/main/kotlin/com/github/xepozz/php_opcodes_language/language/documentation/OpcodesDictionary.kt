@@ -7,7 +7,7 @@ object OpcodesDictionary {
     private val directives = listOf(
         ParameterDoc(
             name = "T",
-            number = 0,,
+            number = 0,
             description = """T-variable is a temporary variable, aimed to be pass the value between opcodes""",
             // language=injectablephp
             examplePhp = $$"""
@@ -25,7 +25,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "V",
-            number = 0,,
+            number = 0,
             description = """V-variable is a temporary variable, aimed to hold value of the called function""",
             // language=injectablephp
             examplePhp = $$"""
@@ -42,7 +42,7 @@ object OpcodesDictionary {
         ),
         ParameterDoc(
             name = "NOP",
-            number = 0,,
+            number = 0,
         ),
         ParameterDoc(
             name = "ADD",
