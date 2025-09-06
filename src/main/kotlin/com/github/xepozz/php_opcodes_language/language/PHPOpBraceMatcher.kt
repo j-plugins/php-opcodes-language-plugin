@@ -8,7 +8,9 @@ import com.intellij.psi.tree.IElementType
 
 class PHPOpBraceMatcher : PairedBraceMatcher {
     private val bracePairs = arrayOf(
-        BracePair(PHPOpTypes.LPAREN, PHPOpTypes.RPAREN, true)
+        BracePair(PHPOpTypes.LPAREN, PHPOpTypes.RPAREN, true),
+        BracePair(PHPOpTypes.LBRACE, PHPOpTypes.RBRACE, true),
+        BracePair(PHPOpTypes.LBRACKET, PHPOpTypes.RBRACKET, true),
     )
 
     override fun getPairs() = bracePairs
