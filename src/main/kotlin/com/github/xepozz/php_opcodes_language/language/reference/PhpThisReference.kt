@@ -16,14 +16,10 @@ class PhpThisReference(
         val useScope = myElement.useScope as? LocalSearchScope ?: return emptyArray()
         val block = useScope.scope.firstOrNull()?.parent as? PHPOpBlock ?: return emptyArray()
         val blockName = block.children.firstOrNull() as? PHPOpBlockName ?: return emptyArray()
-//        println("blockName, ${blockName}")
 
         val className = blockName.classFqn
 
-        return PhpEntityResolver().resolveClasses(myElement.project, className)
-            .let {
-                println("found ${it} classes for className $className")
-                PsiElementResolveResult.createResults(it);
-            }
+        return PhpEntityResolver.resolveClasses(myElement.project, className)
+            .let { PsiElementResolveResult.createResults(it); }
     }
 }

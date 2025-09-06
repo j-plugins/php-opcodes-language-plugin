@@ -1,9 +1,13 @@
 package com.github.xepozz.php_opcodes_language.language.psi.impl
 
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpBlockName
+import com.github.xepozz.php_opcodes_language.language.psi.PHPOpMethodName
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpParameter
+import com.github.xepozz.php_opcodes_language.language.psi.PHPOpPropertyHookName
+import com.github.xepozz.php_opcodes_language.language.psi.PHPOpPropertyName
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpTypes
 import com.intellij.lang.ASTNode
+import com.intellij.openapi.util.TextRange
 import com.jetbrains.php.config.PhpLanguageLevel
 import com.jetbrains.php.refactoring.PhpNameUtil
 
@@ -48,6 +52,21 @@ class PHPOpPsiImplUtil {
 
         @JvmStatic
         fun getClassFqn(element: PHPOpBlockName): String = element.node.text.substringBefore("::")
+
+        @JvmStatic
+        fun getClassFqn(element: PHPOpMethodName): String = element.node.text.substringBefore("::")
+
+        @JvmStatic
+        fun getMethodNameRange(element: PHPOpMethodName): TextRange =
+            element.node.lastChildNode.textRange.shiftLeft(element.textOffset)
+
+        @JvmStatic
+        fun getPropertyNameRange(element: PHPOpPropertyName): TextRange =
+            element.node.lastChildNode.textRange.shiftLeft(element.textOffset).grown(1).shiftLeft(1)
+
+        @JvmStatic
+        fun getPropertyHookNameRange(element: PHPOpPropertyHookName): TextRange =
+            element.node.lastChildNode.textRange.shiftLeft(element.textOffset)
 
         @JvmStatic
         fun isMain(element: PHPOpBlockName): Boolean = element.text == $$"$_main"

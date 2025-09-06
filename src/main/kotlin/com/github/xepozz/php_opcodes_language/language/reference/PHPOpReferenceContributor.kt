@@ -1,12 +1,15 @@
 package com.github.xepozz.php_opcodes_language.language.reference
 
 import com.github.xepozz.php_opcodes_language.Opcodes
-import com.github.xepozz.php_opcodes_language.language.psi.PHPOpBlockName
+import com.github.xepozz.php_opcodes_language.language.psi.PHPOpClassName
+import com.github.xepozz.php_opcodes_language.language.psi.PHPOpFunctionName
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpLineNumber
+import com.github.xepozz.php_opcodes_language.language.psi.PHPOpMethodName
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpParameter
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpParenParameter
+import com.github.xepozz.php_opcodes_language.language.psi.PHPOpPropertyHookName
+import com.github.xepozz.php_opcodes_language.language.psi.PHPOpPropertyName
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpVarName
-import com.intellij.openapi.util.TextRange
 import com.intellij.patterns.PlatformPatterns
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiReference
@@ -43,33 +46,71 @@ class PHPOpReferenceContributor : PsiReferenceContributor() {
         )
 
         registrar.registerReferenceProvider(
-            PlatformPatterns.psiElement(PHPOpBlockName::class.java),
+            PlatformPatterns.psiElement(PHPOpClassName::class.java),
             object : PsiReferenceProvider() {
                 override fun getReferencesByElement(
                     element: PsiElement,
                     context: ProcessingContext
                 ): Array<PsiReference> {
-                    if (element !is PHPOpBlockName) return PsiReference.EMPTY_ARRAY
+                    if (element !is PHPOpClassName) return PsiReference.EMPTY_ARRAY
 
-                    return when {
-                        element.isFqn -> arrayOf(
-                            PhpClassReference(element),
-                            PhpFunctionReference(element),
-                        )
+                    return arrayOf(PhpClassNameReference(element))
+                }
+            }
+        )
 
-                        element.isClassMethod -> arrayOf(
-                            PhpClassReference(element, TextRange(0, element.classFqn.length)),
-                            PhpClassMethodReference(element),
-                        )
+        registrar.registerReferenceProvider(
+            PlatformPatterns.psiElement(PHPOpMethodName::class.java),
+            object : PsiReferenceProvider() {
+                override fun getReferencesByElement(
+                    element: PsiElement,
+                    context: ProcessingContext
+                ): Array<PsiReference> {
+                    if (element !is PHPOpMethodName) return PsiReference.EMPTY_ARRAY
 
-                        element.isClassPropertyHook -> arrayOf(
-                            PhpClassReference(element, TextRange(0, element.classFqn.length)),
-                            PhpClassPropertyHookReference(element, false),
-                            PhpClassPropertyHookReference(element, true),
-                        )
+                    return arrayOf(PhpMethodNameReference(element))
+                }
+            }
+        )
 
-                        else -> PsiReference.EMPTY_ARRAY
-                    }
+        registrar.registerReferenceProvider(
+            PlatformPatterns.psiElement(PHPOpFunctionName::class.java),
+            object : PsiReferenceProvider() {
+                override fun getReferencesByElement(
+                    element: PsiElement,
+                    context: ProcessingContext
+                ): Array<PsiReference> {
+                    if (element !is PHPOpFunctionName) return PsiReference.EMPTY_ARRAY
+
+                    return arrayOf(PhpFunctionNameReference(element))
+                }
+            }
+        )
+
+        registrar.registerReferenceProvider(
+            PlatformPatterns.psiElement(PHPOpPropertyName::class.java),
+            object : PsiReferenceProvider() {
+                override fun getReferencesByElement(
+                    element: PsiElement,
+                    context: ProcessingContext
+                ): Array<PsiReference> {
+                    if (element !is PHPOpPropertyName) return PsiReference.EMPTY_ARRAY
+
+                    return arrayOf(PhpPropertyNameReference(element))
+                }
+            }
+        )
+
+        registrar.registerReferenceProvider(
+            PlatformPatterns.psiElement(PHPOpPropertyHookName::class.java),
+            object : PsiReferenceProvider() {
+                override fun getReferencesByElement(
+                    element: PsiElement,
+                    context: ProcessingContext
+                ): Array<PsiReference> {
+                    if (element !is PHPOpPropertyHookName) return PsiReference.EMPTY_ARRAY
+
+                    return arrayOf(PhpPropertyHookNameReference(element))
                 }
             }
         )
