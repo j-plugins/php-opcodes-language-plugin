@@ -1,21 +1,25 @@
 package com.github.xepozz.php_opcodes_language.language.reference
 
 import com.github.xepozz.php_opcodes_language.Opcodes
+import com.github.xepozz.php_opcodes_language.PsiUtil
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpClassName
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpFunctionName
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpLineNumber
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpMethodName
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpParameter
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpParenParameter
+import com.github.xepozz.php_opcodes_language.language.psi.PHPOpPathAbsolute
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpPropertyHookName
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpPropertyName
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpVarName
 import com.intellij.patterns.PlatformPatterns
 import com.intellij.psi.PsiElement
+import com.intellij.psi.PsiFileSystemItem
 import com.intellij.psi.PsiReference
 import com.intellij.psi.PsiReferenceContributor
 import com.intellij.psi.PsiReferenceProvider
 import com.intellij.psi.PsiReferenceRegistrar
+import com.intellij.psi.impl.source.resolve.reference.impl.providers.FileReferenceSet
 import com.intellij.util.ProcessingContext
 
 class PHPOpReferenceContributor : PsiReferenceContributor() {
@@ -125,6 +129,24 @@ class PHPOpReferenceContributor : PsiReferenceContributor() {
                     if (element !is PHPOpParameter) return PsiReference.EMPTY_ARRAY
 
                     return arrayOf(PhpThisReference(element))
+                }
+            }
+        )
+
+        registrar.registerReferenceProvider(
+            PlatformPatterns.psiElement(PHPOpPathAbsolute::class.java),
+            object : PsiReferenceProvider() {
+                override fun getReferencesByElement(
+                    element: PsiElement,
+                    context: ProcessingContext
+                ): Array<out PsiReference> {
+                    if (element !is PHPOpPathAbsolute) return PsiReference.EMPTY_ARRAY
+
+                    return object : FileReferenceSet(element) {
+                        override fun getDefaultContexts(): Collection<PsiFileSystemItem> {
+                            return listOf(PsiUtil.getTopmostParent(element.containingFile))
+                        }
+                    }.allReferences
                 }
             }
         )
