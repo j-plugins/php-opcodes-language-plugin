@@ -11,4 +11,6 @@ enum class Primitives {
     `null`,
     array,
     global,
+    `object`,
+    resource,
 }
