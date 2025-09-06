@@ -40,6 +40,7 @@ SLASH = "/"
 BACKSLASH = "\\"
 DASH = "-"
 DOT = "."
+COMMA = ","
 AT_SIGN = "@"
 
 %{
@@ -75,6 +76,7 @@ public void yypopState() {
     {SLASH}                                      { return PHPOpTypes.SLASH; }
     {BACKSLASH}                                  { return PHPOpTypes.BACKSLASH; }
     {DOT}                                        { return PHPOpTypes.DOT; }
+    {COMMA}                                      { return PHPOpTypes.COMMA; }
     {AT_SIGN}                                    { return PHPOpTypes.AT_SIGN; }
     {DASH}                                       { return PHPOpTypes.DASH; }
     -?{NUMBER}\.{NUMBER}                         { return PHPOpTypes.FLOAT; }

@@ -28,6 +28,7 @@
     SLASH = "SLASH"
     BACKSLASH = "BACKSLASH"
     DOT = "DOT"
+    COMMA = "COMMA"
     AT_SIGN = "AT_SIGN"
     LBRACE = "LBRACE"
     RBRACE = "RBRACE"
@@ -111,7 +112,7 @@ assignment_instruction ::= (paren_parameter | parameter) EQUALS_SIGN instruction
 
 instruction ::= parameter argument*
 
-argument ::= expr | paren_expr
+argument ::= paren_expr | array_expr | expr
 private expr ::= three_dots | var_name | string_literal | float_value | line_number | paren_parameter | parameter
 
 paren_parameter ::= parameter paren_expr
@@ -144,6 +145,11 @@ private three_dots ::= DOT DOT DOT
 }
 
 paren_expr ::= LPAREN expr RPAREN
+{
+    pin=1
+}
+
+array_expr ::= LBRACKET expr (COMMA expr)* RBRACKET
 {
     pin=1
 }
