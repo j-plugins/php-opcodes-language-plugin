@@ -8,6 +8,7 @@ enum class Primitives {
     long,
     string,
     double,
+    float,
     `null`,
     array,
     global,
