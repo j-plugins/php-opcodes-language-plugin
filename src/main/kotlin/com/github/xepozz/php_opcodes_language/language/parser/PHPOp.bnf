@@ -95,7 +95,7 @@ private closure_name ::= LBRACE 'closure' COLON (path_absolute | method_name LPA
 
 path_absolute ::= (SLASH | BACKSLASH) (IDENTIFIER | DOT | SLASH | BACKSLASH | DASH)+
 {
-    implements=["com.intellij.psi.NavigatablePsiElement" "com.intellij.psi.PsiLiteralValue" "com.intellij.model.psi.PsiExternalReferenceHost"]
+    implements=["com.intellij.psi.NavigatablePsiElement" "com.intellij.psi.PsiLiteralValue"]
     extends="com.github.xepozz.php_opcodes_language.language.psi.impl.PHPOpPathAbsoluteBaseImpl"
 }
 
