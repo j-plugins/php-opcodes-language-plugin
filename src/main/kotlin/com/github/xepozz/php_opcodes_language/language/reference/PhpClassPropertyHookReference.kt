@@ -1,10 +1,13 @@
 package com.github.xepozz.php_opcodes_language.language.reference
 
+import com.github.xepozz.php_opcodes_language.ReflectionUtil
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiElementResolveResult
 import com.intellij.psi.PsiPolyVariantReferenceBase
 import com.intellij.psi.ResolveResult
+import com.jetbrains.php.lang.psi.elements.Field
+import com.jetbrains.php.lang.psi.elements.Method
 
 class PhpClassPropertyHookReference(val myElement: PsiElement, val targetHook: Boolean) :
     PsiPolyVariantReferenceBase<PsiElement>(myElement) {
@@ -16,7 +19,7 @@ class PhpClassPropertyHookReference(val myElement: PsiElement, val targetHook: B
         return PhpEntityResolver().resolveClasses(myElement.project, className)
             .flatMap { it.fields }
             .filter { it.name == propertyName }
-            .run { if (!targetHook) this else flatMap { it.propertyHooksList }.filter { it.name == hookName } }
+            .run { if (!targetHook) this else flatMap { it.filterPropertyHooksCompatible(hookName) } }
             .let { PsiElementResolveResult.createResults(it) }
     }
 
@@ -35,4 +38,10 @@ class PhpClassPropertyHookReference(val myElement: PsiElement, val targetHook: B
             else -> myElement.textRange
         }
     }
+}
+
+private fun Field.filterPropertyHooksCompatible(hookName: String): List<Method> {
+    return ReflectionUtil.callMethodOrNull<List<Method>>(this, "getPropertyHooksList")
+        ?.filter { it.name == hookName }
+        ?: emptyList()
 }
