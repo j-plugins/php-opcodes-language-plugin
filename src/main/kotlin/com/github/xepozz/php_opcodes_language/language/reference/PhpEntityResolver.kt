@@ -10,14 +10,15 @@ import com.jetbrains.php.refactoring.PhpNameUtil
 
 class PhpEntityResolver {
     fun resolveClasses(project: Project, fqn: String): Collection<PhpClass> {
+        val fqn = PhpLangUtil.toFQN(fqn)
         if (!PhpNameUtil.isValidNamespaceFullName(fqn, true, PhpLanguageLevel.current(project))) return emptyList()
 
         return PhpIndex.getInstance(project).getAnyByFQN(fqn)
     }
 
     fun resolveFunction(project: Project, fqn: String): Collection<Function> {
-        if (!PhpNameUtil.isValidNamespaceFullName(fqn, true, PhpLanguageLevel.current(project))) return emptyList()
         val fqn = PhpLangUtil.toFQN(fqn)
+        if (!PhpNameUtil.isValidNamespaceFullName(fqn, true, PhpLanguageLevel.current(project))) return emptyList()
 
         return PhpIndex.getInstance(project).getFunctionsByFQN(fqn)
     }

@@ -47,6 +47,9 @@ class PHPOpPsiImplUtil {
         }
 
         @JvmStatic
+        fun getClassFqn(element: PHPOpBlockName): String = element.node.text.substringBefore("::")
+
+        @JvmStatic
         fun isMain(element: PHPOpBlockName): Boolean = element.text == $$"$_main"
     }
 }

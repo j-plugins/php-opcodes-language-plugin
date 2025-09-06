@@ -49,7 +49,7 @@ block_name ::= var_name | string_literal | getter_name | setter_name | method_na
 {
     implements=["com.intellij.psi.NavigatablePsiElement" "com.intellij.psi.PsiNamedElement" "com.intellij.psi.PsiLiteralValue"]
     extends="com.github.xepozz.php_opcodes_language.language.psi.impl.PHPOpBlockNameBaseImpl"
-    methods=[isFqn isClassMethod isClassPropertyHook isMain]
+    methods=[isFqn isClassMethod isClassPropertyHook isMain getClassFqn]
 }
 
 private class_name ::= ('class' AT_SIGN 'anonymous') | IDENTIFIER

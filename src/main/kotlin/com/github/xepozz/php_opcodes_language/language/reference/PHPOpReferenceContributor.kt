@@ -1,5 +1,6 @@
 package com.github.xepozz.php_opcodes_language.language.reference
 
+import com.github.xepozz.php_opcodes_language.Opcodes
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpBlockName
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpLineNumber
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpParameter
@@ -16,11 +17,17 @@ import com.intellij.util.ProcessingContext
 
 class PHPOpReferenceContributor : PsiReferenceContributor() {
     override fun registerReferenceProviders(registrar: PsiReferenceRegistrar) {
+
         registrar.registerReferenceProvider(
             PlatformPatterns.or(
                 PlatformPatterns.psiElement(PHPOpVarName::class.java),
                 PlatformPatterns.psiElement(PHPOpLineNumber::class.java),
-                PlatformPatterns.psiElement(PHPOpParameter::class.java),
+                PlatformPatterns.and(
+                    PlatformPatterns.psiElement(PHPOpParameter::class.java),
+                    PlatformPatterns.not(
+                        PlatformPatterns.psiElement(PHPOpParameter::class.java).withName(Opcodes.THIS.name)
+                    )
+                ),
                 PlatformPatterns.psiElement(PHPOpParenParameter::class.java),
             ),
             object : PsiReferenceProvider() {
@@ -49,18 +56,34 @@ class PHPOpReferenceContributor : PsiReferenceContributor() {
                             PhpClassReference(element),
                             PhpFunctionReference(element),
                         )
+
                         element.isClassMethod -> arrayOf(
-                            PhpClassReference(element, TextRange(0, element.text.indexOf("::"))),
+                            PhpClassReference(element, TextRange(0, element.classFqn.length)),
                             PhpClassMethodReference(element),
                         )
+
                         element.isClassPropertyHook -> arrayOf(
-                            PhpClassReference(element, TextRange(0, element.text.indexOf("::"))),
+                            PhpClassReference(element, TextRange(0, element.classFqn.length)),
                             PhpClassPropertyHookReference(element, false),
                             PhpClassPropertyHookReference(element, true),
                         )
 
                         else -> PsiReference.EMPTY_ARRAY
                     }
+                }
+            }
+        )
+
+        registrar.registerReferenceProvider(
+            PlatformPatterns.psiElement(PHPOpParameter::class.java).withName(Opcodes.THIS.name),
+            object : PsiReferenceProvider() {
+                override fun getReferencesByElement(
+                    element: PsiElement,
+                    context: ProcessingContext
+                ): Array<PsiReference> {
+                    if (element !is PHPOpParameter) return PsiReference.EMPTY_ARRAY
+
+                    return arrayOf(PhpThisReference(element))
                 }
             }
         )
