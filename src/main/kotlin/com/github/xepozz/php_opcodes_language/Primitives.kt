@@ -5,6 +5,7 @@ enum class Primitives {
     `true`,
     `false`,
     int,
+    long,
     string,
     double,
     `null`,
