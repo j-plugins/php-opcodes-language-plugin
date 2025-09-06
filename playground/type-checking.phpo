@@ -1,0 +1,10 @@
+
+$_main:
+     ; (lines=4, args=0, vars=1, tmps=2)
+     ; (before optimizer)
+     ; /Users/xepozz/IdeaProjects/xepozz/php-opcodes-lang-plugin/playground/type-checking.phpo:1-4
+     ; return  [] RANGE[0..0]
+0000 EXT_STMT
+0001 T1 = TYPE_CHECK TYPE [null, false, long, double, string, array, object, resource] CV0($a)
+0002 FREE T1
+0003 RETURN int(1)
