@@ -1,16 +1,19 @@
 package com.github.xepozz.php_opcodes_language.language.reference
 
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpMethodName
+import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiElementResolveResult
 import com.intellij.psi.PsiPolyVariantReferenceBase
 import com.intellij.psi.ResolveResult
 
-class PhpMethodNameReference(val myElement: PHPOpMethodName) : PsiPolyVariantReferenceBase<PsiElement>(myElement) {
+class PhpMethodNameReference(
+    val myElement: PsiElement,
+    val className: String,
+    val methodName: String,
+    val elementRange: TextRange,
+) : PsiPolyVariantReferenceBase<PsiElement>(myElement, elementRange) {
     override fun multiResolve(incompleteCode: Boolean): Array<out ResolveResult> {
-        val className = myElement.className.name ?: return emptyArray()
-        val methodName = myElement.name
-
         return PhpEntityResolver.resolveClasses(myElement.project, className)
             .flatMap { it.methods }
             .filter { it.name == methodName }
@@ -19,5 +22,12 @@ class PhpMethodNameReference(val myElement: PHPOpMethodName) : PsiPolyVariantRef
 
     override fun isSoft() = false
 
-    override fun getRangeInElement() = myElement.methodNameRange
+    companion object {
+        fun of(element: PHPOpMethodName): PhpMethodNameReference = PhpMethodNameReference(
+            element,
+            element.className.name!!,
+            element.name!!,
+            element.methodNameRange,
+        )
+    }
 }

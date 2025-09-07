@@ -3,6 +3,8 @@ package com.github.xepozz.php_opcodes_language.language.reference
 import com.github.xepozz.php_opcodes_language.Opcodes
 import com.github.xepozz.php_opcodes_language.PsiUtil
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpArgument
+import com.github.xepozz.php_opcodes_language.language.psi.PHPOpBlock
+import com.github.xepozz.php_opcodes_language.language.psi.PHPOpBlockName
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpClassName
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpFunctionName
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpInstruction
@@ -24,6 +26,7 @@ import com.intellij.psi.PsiReferenceContributor
 import com.intellij.psi.PsiReferenceProvider
 import com.intellij.psi.PsiReferenceRegistrar
 import com.intellij.psi.impl.source.resolve.reference.impl.providers.FileReferenceSet
+import com.intellij.psi.search.LocalSearchScope
 import com.intellij.util.ProcessingContext
 
 class PHPOpReferenceContributor : PsiReferenceContributor() {
@@ -76,7 +79,7 @@ class PHPOpReferenceContributor : PsiReferenceContributor() {
                 ): Array<PsiReference> {
                     if (element !is PHPOpMethodName) return PsiReference.EMPTY_ARRAY
 
-                    return arrayOf(PhpMethodNameReference(element))
+                    return arrayOf(PhpMethodNameReference.of(element))
                 }
             }
         )
@@ -104,7 +107,7 @@ class PHPOpReferenceContributor : PsiReferenceContributor() {
                 ): Array<PsiReference> {
                     if (element !is PHPOpPropertyName) return PsiReference.EMPTY_ARRAY
 
-                    return arrayOf(PhpPropertyNameReference(element))
+                    return arrayOf(PhpPropertyNameReference.of(element))
                 }
             }
         )
@@ -169,6 +172,7 @@ class PHPOpReferenceContributor : PsiReferenceContributor() {
                                                     *arrayOf(
                                                         Opcodes.INIT_NS_FCALL_BY_NAME,
                                                         Opcodes.INIT_FCALL,
+                                                        Opcodes.INIT_FCALL_BY_NAME,
                                                         Opcodes.SEND_VAL_EX,
                                                     )
                                                         .map { it.name }
@@ -224,6 +228,115 @@ class PHPOpReferenceContributor : PsiReferenceContributor() {
 
                     val className = element.value.replace("\\\\", "\\")
                     return arrayOf(PhpClassNameReference(element, className))
+                }
+            }
+        )
+
+        registrar.registerReferenceProvider(
+            PlatformPatterns.psiElement(PHPOpStringLiteral::class.java)
+                .withParent(
+                    PlatformPatterns.psiElement(PHPOpParenExpr::class.java)
+                        .withParent(
+                            PlatformPatterns.psiElement(PHPOpParenParameter::class.java)
+                                .withParent(
+                                    PlatformPatterns.psiElement(PHPOpArgument::class.java)
+                                        .withParent(
+                                            PlatformPatterns.psiElement(PHPOpInstruction::class.java)
+                                                .withName(
+                                                    *arrayOf(
+                                                        Opcodes.INIT_METHOD_CALL,
+                                                    )
+                                                        .map { it.name }
+                                                        .toTypedArray(),
+                                                )
+                                        )
+                                        .afterSibling(
+                                            PlatformPatterns.psiElement(PHPOpArgument::class.java)
+                                                .withChild(
+                                                    PlatformPatterns.psiElement(PHPOpParameter::class.java)
+                                                        .withName(Opcodes.THIS.name)
+                                                )
+                                        )
+                                )
+                        )
+                ),
+            object : PsiReferenceProvider() {
+                override fun getReferencesByElement(
+                    element: PsiElement,
+                    context: ProcessingContext
+                ): Array<out PsiReference> {
+                    if (element !is PHPOpStringLiteral) return PsiReference.EMPTY_ARRAY
+
+                    val methodName = element.value
+                    val useScope = element.useScope as? LocalSearchScope ?: return emptyArray()
+                    val block = useScope.scope.firstOrNull()?.parent as? PHPOpBlock ?: return emptyArray()
+                    val blockName = block.children.firstOrNull() as? PHPOpBlockName ?: return emptyArray()
+
+                    val className = blockName.classFqn
+
+                    return arrayOf(
+                        PhpMethodNameReference(
+                            element,
+                            className,
+                            methodName,
+                            element.textRangeInParent.shiftLeft(1),
+                        )
+                    )
+                }
+            }
+        )
+
+        registrar.registerReferenceProvider(
+            PlatformPatterns.psiElement(PHPOpStringLiteral::class.java)
+                .withParent(
+                    PlatformPatterns.psiElement(PHPOpParenExpr::class.java)
+                        .withParent(
+                            PlatformPatterns.psiElement(PHPOpParenParameter::class.java)
+                                .withParent(
+                                    PlatformPatterns.psiElement(PHPOpArgument::class.java)
+                                        .withParent(
+                                            PlatformPatterns.psiElement(PHPOpInstruction::class.java)
+                                                .withName(
+                                                    *arrayOf(
+                                                        Opcodes.FETCH_OBJ_R,
+                                                        Opcodes.ASSIGN_OBJ,
+                                                    )
+                                                        .map { it.name }
+                                                        .toTypedArray(),
+                                                )
+                                        )
+                                        .afterSibling(
+                                            PlatformPatterns.psiElement(PHPOpArgument::class.java)
+                                                .withChild(
+                                                    PlatformPatterns.psiElement(PHPOpParameter::class.java)
+                                                        .withName(Opcodes.THIS.name)
+                                                )
+                                        )
+                                )
+                        )
+                ),
+            object : PsiReferenceProvider() {
+                override fun getReferencesByElement(
+                    element: PsiElement,
+                    context: ProcessingContext
+                ): Array<out PsiReference> {
+                    if (element !is PHPOpStringLiteral) return PsiReference.EMPTY_ARRAY
+
+                    val fieldName = element.value
+                    val useScope = element.useScope as? LocalSearchScope ?: return emptyArray()
+                    val block = useScope.scope.firstOrNull()?.parent as? PHPOpBlock ?: return emptyArray()
+                    val blockName = block.children.firstOrNull() as? PHPOpBlockName ?: return emptyArray()
+
+                    val className = blockName.classFqn
+
+                    return arrayOf(
+                        PhpPropertyNameReference(
+                            element,
+                            className,
+                            fieldName,
+                            element.textRangeInParent.shiftLeft(1),
+                        )
+                    )
                 }
             }
         )

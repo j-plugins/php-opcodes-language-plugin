@@ -1,11 +1,15 @@
 package com.github.xepozz.php_opcodes_language.language.psi.impl
 
+import com.github.xepozz.php_opcodes_language.language.psi.PHPOpBlock
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpStringLiteral
 import com.intellij.icons.AllIcons
 import com.intellij.ide.projectView.PresentationData
 import com.intellij.lang.ASTNode
 import com.intellij.psi.LiteralTextEscaper
 import com.intellij.psi.PsiLanguageInjectionHost
+import com.intellij.psi.search.LocalSearchScope
+import com.intellij.psi.search.SearchScope
+import com.jetbrains.php.lang.psi.PhpPsiUtil
 
 abstract class PHPOpStringLiteralBaseImpl : PHPOpStringLiteral, PHPOpElementImpl {
     constructor(node: ASTNode) : super(node)
@@ -22,4 +26,9 @@ abstract class PHPOpStringLiteralBaseImpl : PHPOpStringLiteral, PHPOpElementImpl
     }
 
     override fun createLiteralTextEscaper() = LiteralTextEscaper.createSimple(this)
+
+    override fun getUseScope(): SearchScope {
+        val block = PhpPsiUtil.getParentOfClass(this, PHPOpBlock::class.java) ?: return LocalSearchScope.EMPTY
+        return LocalSearchScope(block.statementList.toTypedArray())
+    }
 }
