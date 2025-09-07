@@ -8,11 +8,12 @@ class Controller
 
     function getAction()
     {
-        return self::PRIVATE_CONST;
+        \time();
+        return render(self::PRIVATE_CONST);
     }
 }
 
-function render()
+function render(mixed $values): mixed
 {
 
 }
