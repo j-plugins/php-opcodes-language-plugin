@@ -9,6 +9,7 @@ enum class Opcodes() {
     DECLARE_CLASS_DELAYED,
     SEND_VAL_EX,
     INIT_METHOD_CALL,
+    INIT_STATIC_METHOD_CALL,
     FETCH_OBJ_R,
     ASSIGN_OBJ,
     RETURN,

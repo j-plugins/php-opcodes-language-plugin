@@ -1,7 +1,9 @@
 package com.github.xepozz.php_opcodes_language.language.reference
 
 import com.github.xepozz.php_opcodes_language.Opcodes
+import com.github.xepozz.php_opcodes_language.Primitives
 import com.github.xepozz.php_opcodes_language.PsiUtil
+import com.github.xepozz.php_opcodes_language.beforeSibling
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpArgument
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpBlock
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpBlockName
@@ -27,6 +29,7 @@ import com.intellij.psi.PsiReferenceProvider
 import com.intellij.psi.PsiReferenceRegistrar
 import com.intellij.psi.impl.source.resolve.reference.impl.providers.FileReferenceSet
 import com.intellij.psi.search.LocalSearchScope
+import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.util.ProcessingContext
 
 class PHPOpReferenceContributor : PsiReferenceContributor() {
@@ -298,6 +301,126 @@ class PHPOpReferenceContributor : PsiReferenceContributor() {
                                             PlatformPatterns.psiElement(PHPOpInstruction::class.java)
                                                 .withName(
                                                     *arrayOf(
+                                                        Opcodes.INIT_STATIC_METHOD_CALL,
+                                                    )
+                                                        .map { it.name }
+                                                        .toTypedArray(),
+                                                )
+                                        )
+                                        .afterSibling(
+                                            PlatformPatterns.psiElement(PHPOpArgument::class.java)
+                                                .withChild(
+                                                    PlatformPatterns.psiElement(PHPOpParenParameter::class.java)
+                                                        .withFirstChild(
+                                                            PlatformPatterns.psiElement(PHPOpParameter::class.java)
+                                                                .withText(Primitives.string.name)
+                                                        )
+                                                        .withLastChild(
+                                                            PlatformPatterns.psiElement(PHPOpParenExpr::class.java)
+                                                                .withChild(
+                                                                    PlatformPatterns.psiElement(PHPOpStringLiteral::class.java)
+                                                                )
+                                                        )
+                                                )
+                                        )
+                                )
+                        )
+                ),
+            object : PsiReferenceProvider() {
+                override fun getReferencesByElement(
+                    element: PsiElement,
+                    context: ProcessingContext
+                ): Array<out PsiReference> {
+                    if (element !is PHPOpStringLiteral) return PsiReference.EMPTY_ARRAY
+
+                    val methodArgument =
+                        PsiTreeUtil.getParentOfType(element, PHPOpArgument::class.java) ?: return emptyArray()
+
+                    val classElement = PsiTreeUtil
+                        .getParentOfType(element, PHPOpInstruction::class.java)
+                        ?.argumentList
+                        ?.lastOrNull { it !== methodArgument }
+                        ?.run { PsiTreeUtil.findChildOfType(this, PHPOpStringLiteral::class.java) }
+                        ?: return emptyArray()
+
+                    val methodName = element.value
+                    val className = classElement.value
+
+                    return arrayOf(
+                        PhpMethodNameReference(
+                            element,
+                            className,
+                            methodName,
+                            element.textRangeInParent.shiftLeft(1),
+                        )
+                    )
+                }
+            }
+        )
+
+        registrar.registerReferenceProvider(
+            PlatformPatterns.psiElement(PHPOpStringLiteral::class.java)
+                .withParent(
+                    PlatformPatterns.psiElement(PHPOpParenExpr::class.java)
+                        .withParent(
+                            PlatformPatterns.psiElement(PHPOpParenParameter::class.java)
+                                .withParent(
+                                    PlatformPatterns.psiElement(PHPOpArgument::class.java)
+                                        .withParent(
+                                            PlatformPatterns.psiElement(PHPOpInstruction::class.java)
+                                                .withName(
+                                                    *arrayOf(
+                                                        Opcodes.INIT_STATIC_METHOD_CALL,
+                                                    )
+                                                        .map { it.name }
+                                                        .toTypedArray(),
+                                                )
+                                        )
+                                        .beforeSibling(
+                                            PlatformPatterns.psiElement(PHPOpArgument::class.java)
+                                                .withChild(
+                                                    PlatformPatterns.psiElement(PHPOpParenParameter::class.java)
+                                                        .withFirstChild(
+                                                            PlatformPatterns.psiElement(PHPOpParameter::class.java)
+                                                                .withText(Primitives.string.name)
+                                                        )
+                                                        .withLastChild(
+                                                            PlatformPatterns.psiElement(PHPOpParenExpr::class.java)
+                                                                .withChild(
+                                                                    PlatformPatterns.psiElement(PHPOpStringLiteral::class.java)
+                                                                )
+                                                        )
+                                                )
+                                        )
+                                )
+                        )
+                ),
+            object : PsiReferenceProvider() {
+                override fun getReferencesByElement(
+                    element: PsiElement,
+                    context: ProcessingContext
+                ): Array<out PsiReference> {
+                    if (element !is PHPOpStringLiteral) return PsiReference.EMPTY_ARRAY
+
+                    val className = element.value
+
+                    return arrayOf(PhpClassNameReference(element, className))
+                }
+            }
+        )
+
+        registrar.registerReferenceProvider(
+            PlatformPatterns.psiElement(PHPOpStringLiteral::class.java)
+                .withParent(
+                    PlatformPatterns.psiElement(PHPOpParenExpr::class.java)
+                        .withParent(
+                            PlatformPatterns.psiElement(PHPOpParenParameter::class.java)
+                                .withParent(
+                                    PlatformPatterns.psiElement(PHPOpArgument::class.java)
+                                        .withParent(
+                                            PlatformPatterns.psiElement(PHPOpInstruction::class.java)
+                                                .withName(
+                                                    *arrayOf(
                                                         Opcodes.FETCH_OBJ_R,
                                                         Opcodes.ASSIGN_OBJ,
                                                     )
@@ -342,4 +465,3 @@ class PHPOpReferenceContributor : PsiReferenceContributor() {
         )
     }
 }
-
