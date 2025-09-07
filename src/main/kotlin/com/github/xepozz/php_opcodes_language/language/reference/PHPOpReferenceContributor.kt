@@ -333,8 +333,8 @@ class PHPOpReferenceContributor : PsiReferenceContributor() {
                 ): Array<out PsiReference> {
                     if (element !is PHPOpStringLiteral) return PsiReference.EMPTY_ARRAY
 
-                    val methodArgument =
-                        PsiTreeUtil.getParentOfType(element, PHPOpArgument::class.java) ?: return emptyArray()
+                    val methodArgument = PsiTreeUtil.getParentOfType(element, PHPOpArgument::class.java)
+                        ?: return emptyArray()
 
                     val classElement = PsiTreeUtil
                         .getParentOfType(element, PHPOpInstruction::class.java)
@@ -403,6 +403,128 @@ class PHPOpReferenceContributor : PsiReferenceContributor() {
                     if (element !is PHPOpStringLiteral) return PsiReference.EMPTY_ARRAY
 
                     val className = element.value
+
+                    return arrayOf(PhpClassNameReference(element, className))
+                }
+            }
+        )
+
+        registrar.registerReferenceProvider(
+            PlatformPatterns.psiElement(PHPOpStringLiteral::class.java)
+                .withParent(
+                    PlatformPatterns.psiElement(PHPOpParenExpr::class.java)
+                        .withParent(
+                            PlatformPatterns.psiElement(PHPOpParenParameter::class.java)
+                                .withParent(
+                                    PlatformPatterns.psiElement(PHPOpArgument::class.java)
+                                        .withParent(
+                                            PlatformPatterns.psiElement(PHPOpInstruction::class.java)
+                                                .withName(
+                                                    *arrayOf(
+                                                        Opcodes.FETCH_STATIC_PROP_R,
+                                                        Opcodes.ASSIGN_STATIC_PROP,
+                                                    )
+                                                        .map { it.name }
+                                                        .toTypedArray(),
+                                                )
+                                        )
+                                        .beforeSibling(
+                                            PlatformPatterns.psiElement(PHPOpArgument::class.java)
+                                                .withChild(
+                                                    PlatformPatterns.psiElement(PHPOpParenParameter::class.java)
+                                                        .withFirstChild(
+                                                            PlatformPatterns.psiElement(PHPOpParameter::class.java)
+                                                                .withText(Primitives.string.name)
+                                                        )
+                                                        .withLastChild(
+                                                            PlatformPatterns.psiElement(PHPOpParenExpr::class.java)
+                                                                .withChild(
+                                                                    PlatformPatterns.psiElement(PHPOpStringLiteral::class.java)
+                                                                )
+                                                        )
+                                                )
+                                        )
+                                )
+                        )
+                ),
+            object : PsiReferenceProvider() {
+                override fun getReferencesByElement(
+                    element: PsiElement,
+                    context: ProcessingContext
+                ): Array<out PsiReference> {
+                    if (element !is PHPOpStringLiteral) return PsiReference.EMPTY_ARRAY
+
+                    val propertyArgument = PsiTreeUtil.getParentOfType(element, PHPOpArgument::class.java)
+                        ?: return emptyArray()
+
+                    val classElement = PsiTreeUtil
+                        .getParentOfType(element, PHPOpInstruction::class.java)
+                        ?.argumentList
+                        ?.lastOrNull { it !== propertyArgument }
+                        ?.run { PsiTreeUtil.findChildOfType(this, PHPOpStringLiteral::class.java) }
+                        ?: return emptyArray()
+
+                    val propertyName = element.value
+                    val className = classElement.value.replace("\\\\", "\\")
+
+                    return arrayOf(
+                        PhpPropertyNameReference(
+                            element,
+                            className,
+                            propertyName,
+                            element.textRangeInParent.shiftLeft(1),
+                        )
+                    )
+                }
+            }
+        )
+
+        registrar.registerReferenceProvider(
+            PlatformPatterns.psiElement(PHPOpStringLiteral::class.java)
+                .withParent(
+                    PlatformPatterns.psiElement(PHPOpParenExpr::class.java)
+                        .withParent(
+                            PlatformPatterns.psiElement(PHPOpParenParameter::class.java)
+                                .withParent(
+                                    PlatformPatterns.psiElement(PHPOpArgument::class.java)
+                                        .withParent(
+                                            PlatformPatterns.psiElement(PHPOpInstruction::class.java)
+                                                .withName(
+                                                    *arrayOf(
+                                                        Opcodes.FETCH_STATIC_PROP_R,
+                                                        Opcodes.ASSIGN_STATIC_PROP,
+                                                    )
+                                                        .map { it.name }
+                                                        .toTypedArray(),
+                                                )
+                                        )
+                                        .afterSibling(
+                                            PlatformPatterns.psiElement(PHPOpArgument::class.java)
+                                                .withChild(
+                                                    PlatformPatterns.psiElement(PHPOpParenParameter::class.java)
+                                                        .withFirstChild(
+                                                            PlatformPatterns.psiElement(PHPOpParameter::class.java)
+                                                                .withText(Primitives.string.name)
+                                                        )
+                                                        .withLastChild(
+                                                            PlatformPatterns.psiElement(PHPOpParenExpr::class.java)
+                                                                .withChild(
+                                                                    PlatformPatterns.psiElement(PHPOpStringLiteral::class.java)
+                                                                )
+                                                        )
+                                                )
+                                        )
+                                )
+                        )
+                ),
+            object : PsiReferenceProvider() {
+                override fun getReferencesByElement(
+                    element: PsiElement,
+                    context: ProcessingContext
+                ): Array<out PsiReference> {
+                    if (element !is PHPOpStringLiteral) return PsiReference.EMPTY_ARRAY
+
+                    val className = element.value.replace("\\\\", "\\")
 
                     return arrayOf(PhpClassNameReference(element, className))
                 }
