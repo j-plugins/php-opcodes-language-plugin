@@ -42,7 +42,13 @@ class PHPOpReferenceContributor : PsiReferenceContributor() {
                 PlatformPatterns.and(
                     PlatformPatterns.psiElement(PHPOpParameter::class.java),
                     PlatformPatterns.not(
-                        PlatformPatterns.psiElement(PHPOpParameter::class.java).withName(Opcodes.THIS.name)
+                        PlatformPatterns.psiElement(PHPOpParameter::class.java)
+                            .withName(
+                                Opcodes.THIS.name,
+                                *Primitives.entries
+                                    .map { it.name }
+                                    .toTypedArray(),
+                            )
                     )
                 ),
                 PlatformPatterns.psiElement(PHPOpParenParameter::class.java),
