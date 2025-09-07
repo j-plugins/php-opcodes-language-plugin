@@ -22,6 +22,4 @@ abstract class PHPOpStringLiteralBaseImpl : PHPOpStringLiteral, PHPOpElementImpl
     }
 
     override fun createLiteralTextEscaper() = LiteralTextEscaper.createSimple(this)
-
-    override fun getValue(): String = text
 }

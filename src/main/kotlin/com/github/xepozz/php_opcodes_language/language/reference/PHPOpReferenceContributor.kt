@@ -2,15 +2,19 @@ package com.github.xepozz.php_opcodes_language.language.reference
 
 import com.github.xepozz.php_opcodes_language.Opcodes
 import com.github.xepozz.php_opcodes_language.PsiUtil
+import com.github.xepozz.php_opcodes_language.language.psi.PHPOpArgument
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpClassName
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpFunctionName
+import com.github.xepozz.php_opcodes_language.language.psi.PHPOpInstruction
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpLineNumber
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpMethodName
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpParameter
+import com.github.xepozz.php_opcodes_language.language.psi.PHPOpParenExpr
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpParenParameter
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpPathAbsolute
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpPropertyHookName
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpPropertyName
+import com.github.xepozz.php_opcodes_language.language.psi.PHPOpStringLiteral
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpVarName
 import com.intellij.patterns.PlatformPatterns
 import com.intellij.psi.PsiElement
@@ -58,7 +62,7 @@ class PHPOpReferenceContributor : PsiReferenceContributor() {
                 ): Array<PsiReference> {
                     if (element !is PHPOpClassName) return PsiReference.EMPTY_ARRAY
 
-                    return arrayOf(PhpClassNameReference(element))
+                    return arrayOf(PhpClassNameReference(element, element.name ?: return PsiReference.EMPTY_ARRAY))
                 }
             }
         )
@@ -86,7 +90,7 @@ class PHPOpReferenceContributor : PsiReferenceContributor() {
                 ): Array<PsiReference> {
                     if (element !is PHPOpFunctionName) return PsiReference.EMPTY_ARRAY
 
-                    return arrayOf(PhpFunctionNameReference(element))
+                    return arrayOf(PhpFunctionNameReference(element, element.name ?: return PsiReference.EMPTY_ARRAY))
                 }
             }
         )
@@ -147,6 +151,79 @@ class PHPOpReferenceContributor : PsiReferenceContributor() {
                             return listOf(PsiUtil.getTopmostParent(element.containingFile))
                         }
                     }.allReferences
+                }
+            }
+        )
+
+        registrar.registerReferenceProvider(
+            PlatformPatterns.psiElement(PHPOpStringLiteral::class.java)
+                .withParent(
+                    PlatformPatterns.psiElement(PHPOpParenExpr::class.java)
+                        .withParent(
+                            PlatformPatterns.psiElement(PHPOpParenParameter::class.java)
+                                .withParent(
+                                    PlatformPatterns.psiElement(PHPOpArgument::class.java)
+                                        .withParent(
+                                            PlatformPatterns.psiElement(PHPOpInstruction::class.java)
+                                                .withName(
+                                                    *arrayOf(
+                                                        Opcodes.INIT_NS_FCALL_BY_NAME,
+                                                        Opcodes.INIT_FCALL,
+                                                        Opcodes.SEND_VAL_EX,
+                                                    )
+                                                        .map { it.name }
+                                                        .toTypedArray(),
+                                                )
+                                        )
+                                )
+                        )
+                ),
+            object : PsiReferenceProvider() {
+                override fun getReferencesByElement(
+                    element: PsiElement,
+                    context: ProcessingContext
+                ): Array<out PsiReference> {
+                    if (element !is PHPOpStringLiteral) return PsiReference.EMPTY_ARRAY
+
+                    val functionName = element.value.replace("\\\\", "\\")
+                    return arrayOf(PhpFunctionNameReference(element, functionName))
+                }
+            }
+        )
+
+        registrar.registerReferenceProvider(
+            PlatformPatterns.psiElement(PHPOpStringLiteral::class.java)
+                .withParent(
+                    PlatformPatterns.psiElement(PHPOpParenExpr::class.java)
+                        .withParent(
+                            PlatformPatterns.psiElement(PHPOpParenParameter::class.java)
+                                .withParent(
+                                    PlatformPatterns.psiElement(PHPOpArgument::class.java)
+                                        .withParent(
+                                            PlatformPatterns.psiElement(PHPOpInstruction::class.java)
+                                                .withName(
+                                                    *arrayOf(
+                                                        Opcodes.NEW,
+                                                        Opcodes.FETCH_CLASS_CONSTANT,
+                                                        Opcodes.DECLARE_CLASS_DELAYED,
+                                                        Opcodes.SEND_VAL_EX,
+                                                    )
+                                                        .map { it.name }
+                                                        .toTypedArray(),
+                                                )
+                                        )
+                                )
+                        )
+                ),
+            object : PsiReferenceProvider() {
+                override fun getReferencesByElement(
+                    element: PsiElement,
+                    context: ProcessingContext
+                ): Array<out PsiReference> {
+                    if (element !is PHPOpStringLiteral) return PsiReference.EMPTY_ARRAY
+
+                    val className = element.value.replace("\\\\", "\\")
+                    return arrayOf(PhpClassNameReference(element, className))
                 }
             }
         )

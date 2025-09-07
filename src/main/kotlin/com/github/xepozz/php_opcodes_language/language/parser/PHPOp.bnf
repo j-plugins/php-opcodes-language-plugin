@@ -111,6 +111,10 @@ assignment_instruction ::= (paren_parameter | parameter) EQUALS_SIGN instruction
 }
 
 instruction ::= parameter argument*
+{
+    implements=["com.intellij.psi.PsiNamedElement"]
+    extends="com.github.xepozz.php_opcodes_language.language.psi.impl.PHPOpInstructionBaseImpl"
+}
 
 argument ::= paren_expr | array_expr | expr
 private expr ::= three_dots | var_name | string_literal | float_value | line_number | paren_parameter | parameter
@@ -132,13 +136,10 @@ string_literal ::= QUOTTED_STRING
 {
     implements=["com.intellij.psi.PsiLanguageInjectionHost" "com.intellij.psi.PsiLiteralValue"]
     extends="com.github.xepozz.php_opcodes_language.language.psi.impl.PHPOpStringLiteralBaseImpl"
+    methods=[getValue]
 }
 
 float_value ::= FLOAT
-{
-    implements=["com.intellij.psi.PsiLanguageInjectionHost" "com.intellij.psi.PsiLiteralValue"]
-    extends="com.github.xepozz.php_opcodes_language.language.psi.impl.PHPOpStringLiteralBaseImpl"
-}
 
 private three_dots ::= DOT DOT DOT
 {

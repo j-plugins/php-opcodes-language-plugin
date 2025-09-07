@@ -5,6 +5,7 @@ import com.github.xepozz.php_opcodes_language.language.psi.PHPOpMethodName
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpParameter
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpPropertyHookName
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpPropertyName
+import com.github.xepozz.php_opcodes_language.language.psi.PHPOpStringLiteral
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpTypes
 import com.intellij.lang.ASTNode
 import com.intellij.openapi.util.TextRange
@@ -70,5 +71,8 @@ class PHPOpPsiImplUtil {
 
         @JvmStatic
         fun isMain(element: PHPOpBlockName): Boolean = element.text == $$"$_main"
+
+        @JvmStatic
+        fun getValue(element: PHPOpStringLiteral): String = element.text.substring(1, element.text.length - 1)
     }
 }
