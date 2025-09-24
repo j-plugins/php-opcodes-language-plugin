@@ -205,6 +205,39 @@ class PHPOpReferenceContributor : PsiReferenceContributor() {
         )
 
         registrar.registerReferenceProvider(
+            PlatformPatterns.psiElement(PHPOpParameter::class.java)
+                .withParent(
+                    PlatformPatterns.psiElement(PHPOpParenExpr::class.java)
+                        .withParent(
+                            PlatformPatterns.psiElement(PHPOpArgument::class.java)
+                                .withParent(
+                                    PlatformPatterns.psiElement(PHPOpInstruction::class.java)
+                                        .withName(
+                                            *arrayOf(
+                                                Opcodes.FRAMELESS_ICALL_0,
+                                                Opcodes.FRAMELESS_ICALL_1,
+                                                Opcodes.FRAMELESS_ICALL_2,
+                                                Opcodes.FRAMELESS_ICALL_3,
+                                            )
+                                                .map { it.name }
+                                                .toTypedArray(),
+                                        )
+                                )
+                        )
+                ),
+            object : PsiReferenceProvider() {
+                override fun getReferencesByElement(
+                    element: PsiElement,
+                    context: ProcessingContext
+                ): Array<out PsiReference> {
+                    println("PHPOpTypes.IDENTIFIER: ${element.text}")
+                    val functionName = element.text
+                    return arrayOf(PhpFunctionNameReference(element, functionName))
+                }
+            }
+        )
+
+        registrar.registerReferenceProvider(
             PlatformPatterns.psiElement(PHPOpStringLiteral::class.java)
                 .withParent(
                     PlatformPatterns.psiElement(PHPOpParenExpr::class.java)
