@@ -11,7 +11,7 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <gotoDeclarationHandler
-                implementation="com.github.xepozz.php_opcodes_language.language.navigation.DeclarationHandler"/>
+                implementation="com.github.xepozz.php_opcodes_language.navigation.DeclarationHandler"/>
         <fileType
                 name="PHP Opcodes"
                 implementationClass="com.github.xepozz.php_opcodes_language.language.PHPOpFileType"
@@ -40,7 +40,7 @@
 
         <lang.documentationProvider
                 language="PHP Opcodes"
-                implementationClass="com.github.xepozz.php_opcodes_language.language.documentation.PHPOpDocumentationProvider"/>
+                implementationClass="com.github.xepozz.php_opcodes_language.documentation.PHPOpDocumentationProvider"/>
 
         <lang.foldingBuilder
                 language="PHP Opcodes"
@@ -48,6 +48,6 @@
 
         <psi.referenceContributor
                 language="PHP Opcodes"
-                implementation="com.github.xepozz.php_opcodes_language.language.reference.PHPOpReferenceContributor"/>
+                implementation="com.github.xepozz.php_opcodes_language.reference.PHPOpReferenceContributor"/>
     </extensions>
 </idea-plugin>

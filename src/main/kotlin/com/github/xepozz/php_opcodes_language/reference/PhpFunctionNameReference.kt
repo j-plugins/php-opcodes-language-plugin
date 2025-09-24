@@ -1,4 +1,4 @@
-package com.github.xepozz.php_opcodes_language.language.reference
+package com.github.xepozz.php_opcodes_language.reference
 
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiElementResolveResult

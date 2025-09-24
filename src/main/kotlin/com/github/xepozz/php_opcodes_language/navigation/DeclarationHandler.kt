@@ -1,4 +1,4 @@
-package com.github.xepozz.php_opcodes_language.language.navigation
+package com.github.xepozz.php_opcodes_language.navigation
 
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpAssignmentInstruction
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpLineNumber

@@ -1,4 +1,4 @@
-package com.github.xepozz.php_opcodes_language.language.documentation
+package com.github.xepozz.php_opcodes_language.documentation
 
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpParameter
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpParenParameter

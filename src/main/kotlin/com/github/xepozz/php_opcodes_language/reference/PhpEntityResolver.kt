@@ -1,4 +1,4 @@
-package com.github.xepozz.php_opcodes_language.language.reference
+package com.github.xepozz.php_opcodes_language.reference
 
 import com.intellij.openapi.project.Project
 import com.jetbrains.php.PhpIndex

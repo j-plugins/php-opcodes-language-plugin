@@ -1,4 +1,4 @@
-package com.github.xepozz.php_opcodes_language.language.documentation
+package com.github.xepozz.php_opcodes_language.documentation
 
 /**
  * See [examples](https://phpdoctest.github.io/en/internals2.opcodes.list.html)
