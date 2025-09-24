@@ -17,10 +17,14 @@ class PHPOpFoldingBuilder : FoldingBuilderEx(), DumbAware {
     private fun collectFoldingBlocks(element: PsiElement) =
         PsiTreeUtil
             .findChildrenOfType(element, PHPOpBlock::class.java)
-            .map {
+            .mapNotNull {
+                val startOffset = it.blockName.textRange.endOffset + 1
+                val endOffset = it.textRange.endOffset - 1
+                if (endOffset <= startOffset) return@mapNotNull null
+
                 FoldingDescriptor(
                     it.node,
-                    TextRange(it.blockName.textRange.endOffset + 1, it.textRange.endOffset - 1)
+                    TextRange(startOffset, endOffset)
                 )
             }
 
