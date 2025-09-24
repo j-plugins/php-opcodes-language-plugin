@@ -51,11 +51,10 @@ abstract class PHPOpParameterBaseImpl : PHPOpParameter, PHPOpElementImpl {
     override fun isReferenceTo(psiElement: PsiElement) = when (psiElement) {
         !is PHPOpParameter -> false
         else -> when {
-            isSelfReferencable(this) && isSelfReferencable(psiElement) -> true
-//            isThisVariable(this) && isThisVariable(psiElement) -> false
             isPrimitive(this) || isPrimitive(psiElement) -> false
-            !this.isVariable || !psiElement.isVariable -> false
-            else -> this.text == psiElement.text
+            isSelfReferencable(this) && isSelfReferencable(psiElement) -> true
+            this.isVariable && psiElement.isVariable -> true
+            else -> false
         }
     }
 

@@ -52,8 +52,8 @@ abstract class PHPOpParenParameterBaseImpl : PHPOpParenParameter, PHPOpElementIm
     override fun isReferenceTo(psiElement: PsiElement) = when (psiElement) {
         !is PHPOpParenParameter -> false
         else -> when {
-            !this.parameter.isVariable || !psiElement.parameter.isVariable -> false
-            else -> this.text == psiElement.text
+            this.parameter.isVariable && psiElement.parameter.isVariable -> true
+            else -> false
         }
     }
 
