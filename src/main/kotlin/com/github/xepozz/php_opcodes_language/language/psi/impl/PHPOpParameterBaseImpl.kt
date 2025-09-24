@@ -53,7 +53,7 @@ abstract class PHPOpParameterBaseImpl : PHPOpParameter, PHPOpElementImpl {
         else -> when {
             isPrimitive(this) || isPrimitive(psiElement) -> false
             isSelfReferencable(this) && isSelfReferencable(psiElement) -> true
-            this.isVariable && psiElement.isVariable -> true
+            this.isVariable && psiElement.isVariable && this.text == psiElement.text -> true
             else -> false
         }
     }

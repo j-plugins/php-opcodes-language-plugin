@@ -39,6 +39,7 @@ class PHPOpReferenceContributor : PsiReferenceContributor() {
             PlatformPatterns.or(
                 PlatformPatterns.psiElement(PHPOpVarName::class.java),
                 PlatformPatterns.psiElement(PHPOpLineNumber::class.java),
+                PlatformPatterns.psiElement(PHPOpParameter::class.java),
             ),
             object : PsiReferenceProvider() {
                 override fun getReferencesByElement(
