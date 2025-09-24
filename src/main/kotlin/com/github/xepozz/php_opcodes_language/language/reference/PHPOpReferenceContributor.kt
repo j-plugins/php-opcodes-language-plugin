@@ -51,7 +51,6 @@ class PHPOpReferenceContributor : PsiReferenceContributor() {
                             )
                     )
                 ),
-                PlatformPatterns.psiElement(PHPOpParenParameter::class.java),
             ),
             object : PsiReferenceProvider() {
                 override fun getReferencesByElement(
