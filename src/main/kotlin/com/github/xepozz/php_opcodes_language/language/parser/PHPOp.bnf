@@ -118,7 +118,7 @@ instruction ::= parameter argument*
 }
 private instruction_recovery ::= !(EOL)
 
-argument ::= paren_expr | array_expr | expr
+argument ::= paren_expr | array_expr | expr_pairs | expr
 private expr ::= three_dots | var_name | string_literal | float_value | line_number | paren_parameter | parameter
 
 paren_parameter ::= parameter paren_expr
@@ -146,6 +146,15 @@ float_value ::= FLOAT
 private three_dots ::= DOT DOT DOT
 {
 }
+
+expr_pairs ::= paired_expr (COMMA paired_expr)*
+
+paired_expr ::= paired_expr_key COLON paired_expr_value
+{
+    pin=2
+}
+paired_expr_key ::= expr
+paired_expr_value ::= expr
 
 paren_expr ::= LPAREN expr RPAREN
 {
