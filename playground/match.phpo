@@ -1,0 +1,73 @@
+
+$_main:
+     ; (lines=1, args=0, vars=0, tmps=1)
+     ; (before optimizer)
+     ; /Users/xepozz/IdeaProjects/xepozz/php-opcodes-lang-plugin/playground/match.php:1-28
+     ; return  [] RANGE[0..0]
+0000 RETURN int(1)
+
+match1:
+     ; (lines=11, args=0, vars=0, tmps=3)
+     ; (before optimizer)
+     ; /Users/xepozz/IdeaProjects/xepozz/php-opcodes-lang-plugin/playground/match.php:3-10
+     ; return  [] RANGE[0..0]
+0000 EXT_STMT
+0001 MATCH bool(true) 123: 0002, "text": 0004, default: 0006
+0002 T1 = QM_ASSIGN int(2)
+0003 JMP 0008
+0004 T1 = QM_ASSIGN int(1)
+0005 JMP 0008
+0006 T1 = QM_ASSIGN int(0)
+0007 JMP 0008
+0008 FREE T1
+0009 EXT_STMT
+0010 RETURN null
+LIVE RANGES:
+     1: 0007 - 0008 (tmp/var)
+
+match2:
+     ; (lines=38, args=0, vars=3, tmps=8)
+     ; (before optimizer)
+     ; /Users/xepozz/IdeaProjects/xepozz/php-opcodes-lang-plugin/playground/match.php:13-28
+     ; return  [] RANGE[0..0]
+0000 EXT_STMT
+0001 ASSIGN CV0($variable) null
+0002 EXT_STMT
+0003 T4 = JMP_SET CV2($arg) 0007
+0004 T5 = COALESCE bool(false) 0006
+0005 T5 = QM_ASSIGN null
+0006 T4 = QM_ASSIGN T5
+0007 INIT_FCALL_BY_NAME 2 string("my_func")
+0008 SEND_VAR_EX CV0($variable) 1
+0009 SEND_VAL_EX bool(true) 2
+0010 V7 = DO_FCALL
+0011 T6 = CASE_STRICT T4 V7
+0012 JMPNZ T6 0022
+0013 T6 = CASE_STRICT T4 null
+0014 JMPNZ T6 0024
+0015 T6 = CASE_STRICT T4 CV0($variable)
+0016 JMPNZ T6 0026
+0017 T6 = CASE_STRICT T4 int(123)
+0018 JMPNZ T6 0028
+0019 T6 = CASE_STRICT T4 string("text")
+0020 JMPNZ T6 0030
+0021 JMP 0032
+0022 T8 = QM_ASSIGN int(4)
+0023 JMP 0034
+0024 T8 = QM_ASSIGN int(4)
+0025 JMP 0034
+0026 T8 = QM_ASSIGN int(3)
+0027 JMP 0034
+0028 T8 = QM_ASSIGN int(2)
+0029 JMP 0034
+0030 T8 = QM_ASSIGN int(1)
+0031 JMP 0034
+0032 T8 = QM_ASSIGN int(0)
+0033 JMP 0034
+0034 FREE T4
+0035 ASSIGN CV1($res) T8
+0036 EXT_STMT
+0037 RETURN null
+LIVE RANGES:
+     4: 0007 - 0034 (tmp/var)
+     8: 0033 - 0035 (tmp/var)
