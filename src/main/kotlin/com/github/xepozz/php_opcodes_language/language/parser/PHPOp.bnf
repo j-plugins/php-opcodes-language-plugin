@@ -114,7 +114,9 @@ instruction ::= parameter argument*
 {
     implements=["com.intellij.psi.PsiNamedElement"]
     extends="com.github.xepozz.php_opcodes_language.language.psi.impl.PHPOpInstructionBaseImpl"
+    recoverWhile=instruction_recovery
 }
+private instruction_recovery ::= !(EOL)
 
 argument ::= paren_expr | array_expr | expr
 private expr ::= three_dots | var_name | string_literal | float_value | line_number | paren_parameter | parameter
