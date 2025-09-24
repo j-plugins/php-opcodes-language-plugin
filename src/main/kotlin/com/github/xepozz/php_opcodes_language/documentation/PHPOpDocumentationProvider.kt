@@ -21,15 +21,18 @@ class PHPOpDocumentationProvider : AbstractDocumentationProvider() {
     override fun generateDoc(element: PsiElement?, originalElement: PsiElement?): String? = when (element) {
         is PHPOpParenParameter -> generateDoc(element.parameter, originalElement)
         is PHPOpParameter -> {
-            val directiveName =
-                if (element.isVariable) element.text.trimEnd { it.isDigit() } else element.text.toString()
+            val elementName = element.text ?: return null
+            val directiveName = when {
+                element.isVariable -> elementName.trimEnd { it.isDigit() }
+                else -> elementName
+            }
             val doc = OpcodesDictionary.getDocumentation(directiveName) ?: return null
 
             val highlighter = CodeBlockHtmlSyntaxHighlighter(element.project)
 
             buildString {
                 append("<div class='definition'>")
-                append("<pre><b>Name</b>: ${doc.name}</pre>")
+                append("<pre><b>Name</b>: ${elementName}</pre>")
                 if (doc.number >= 0) {
                     append("<pre><b>Number</b>: ${doc.number}</pre>")
                 }
