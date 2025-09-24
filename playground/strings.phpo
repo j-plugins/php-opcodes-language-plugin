@@ -1,0 +1,57 @@
+
+$_main:
+     ; (lines=51, args=0, vars=0, tmps=2)
+     ; (after optimizer)
+     ; /Users/xepozz/IdeaProjects/xepozz/php-opcodes-lang-plugin/playground/strings.phpo:1-48
+0000 EXT_STMT
+0001 INIT_FCALL 30 576 string("var_dump")
+0002 SEND_VAL string("single quotes") 1
+0003 SEND_VAL string("double quotes") 2
+0004 SEND_VAL string("escaped single quote ' in single quotes") 3
+0005 SEND_VAL string("escaped double quote \\\" in single quotes") 4
+0006 SEND_VAL string("escaped single quote \\' in double quotes") 5
+0007 SEND_VAL string("escaped double quote \" in double quotes") 6
+0008 SEND_VAL string("quoted \"string\" in single quoted string") 7
+0009 SEND_VAL string("concatenatedstring") 8
+0010 SEND_VAL string("concatenatedstring2") 9
+0011 SEND_VAL string("concatenated with const
+string") 10
+0012 SEND_VAL string("templated string") 11
+0013 SEND_VAL string("templated string with variable") 12
+0014 SEND_VAL string("templated string with \"variable\" in quotes") 13
+0015 SEND_VAL string("YmFzZTY0IGVuY29kZWQgc3RyaW5n") 14
+0016 SEND_VAL string("repeated stringrepeated stringrepeated string") 15
+0017 SEND_VAL string("replaced string") 16
+0018 SEND_VAL string("string") 17
+0019 SEND_VAL string("repeated ") 18
+0020 SEND_VAL int(65) 19
+0021 INIT_FCALL 1 112 string("mb_ord")
+0022 SEND_VAL string("A") 1
+0023 V0 = DO_ICALL
+0024 SEND_VAR V0 20
+0025 SEND_VAL string("\"") 21
+0026 INIT_FCALL 1 112 string("mb_chr")
+0027 SEND_VAL int(34) 1
+0028 V0 = DO_ICALL
+0029 SEND_VAR V0 22
+0030 SEND_VAL array(...) 23
+0031 SEND_VAL string("implode me") 24
+0032 SEND_VAL array(...) 25
+0033 INIT_FCALL 1 112 string("mb_str_split")
+0034 SEND_VAL string("split string") 1
+0035 V0 = DO_ICALL
+0036 SEND_VAR V0 26
+0037 SEND_VAL bool(true) 27
+0038 INIT_FCALL 3 144 string("str_pad")
+0039 SEND_VAL string("pad") 1
+0040 SEND_VAL int(10) 2
+0041 SEND_VAL string("-") 3
+0042 V0 = DO_ICALL
+0043 SEND_VAR V0 28
+0044 INIT_FCALL 1 112 string("str_shuffle")
+0045 SEND_VAL string("shuffled string") 1
+0046 V0 = DO_ICALL
+0047 SEND_VAR V0 29
+0048 SEND_VAL int(-1) 30
+0049 DO_ICALL
+0050 RETURN int(1)
