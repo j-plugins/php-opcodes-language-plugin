@@ -10,7 +10,9 @@ import com.github.xepozz.php_opcodes_language.language.psi.PHPOpParameter
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpParenParameter
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpPropertyHookName
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpPropertyName
+import com.github.xepozz.php_opcodes_language.language.psi.PHPOpStatement
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpVarName
+import com.intellij.codeInspection.ProblemHighlightType
 import com.intellij.lang.annotation.AnnotationHolder
 import com.intellij.lang.annotation.Annotator
 import com.intellij.lang.annotation.HighlightSeverity
@@ -28,10 +30,17 @@ class PHPOpAnnotator : Annotator {
             }
 
             is PHPOpLineNumber -> {
-                holder.newSilentAnnotation(HighlightSeverity.INFORMATION)
-                    .range(element)
-                    .textAttributes(PhpHighlightingData.NUMBER)
-                    .create()
+                if (element.parent is PHPOpStatement) {
+                    holder.newSilentAnnotation(HighlightSeverity.INFORMATION)
+                        .range(element)
+                        .highlightType(ProblemHighlightType.LIKE_UNUSED_SYMBOL)
+                        .create()
+                } else {
+                    holder.newSilentAnnotation(HighlightSeverity.INFORMATION)
+                        .range(element)
+                        .textAttributes(PhpHighlightingData.NUMBER)
+                        .create()
+                }
             }
 
             is PHPOpParameter -> {
