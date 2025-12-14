@@ -176,7 +176,9 @@ var_name ::= DOLLAR_SIGN IDENTIFIER
     extends="com.github.xepozz.php_opcodes_language.language.psi.impl.PHPOpVarNameBaseImpl"
 }
 
-live_range ::= 'LIVE RANGES:' (live_range_statement | EOL)*
+live_range ::= 'LIVE RANGES:' live_range_statements
+
+live_range_statements ::= live_range_statement (EOL live_range_statement)*
 
 live_range_statement ::= INTEGER COLON live_range_range LPAREN live_type RPAREN
 {
@@ -201,9 +203,9 @@ exception_table ::= 'EXCEPTION TABLE:'  exception_table_statements
     pin=1
 }
 
-exception_table_statements ::= exception_table_statement+
+exception_table_statements ::= exception_table_statement (EOL exception_table_statement)*
 
-exception_table_statement ::= exception_table_expr (COMMA exception_table_expr)+ EOL
+exception_table_statement ::= exception_table_expr (COMMA exception_table_expr)*
 
 exception_table_expr ::= line_number | DASH
 
