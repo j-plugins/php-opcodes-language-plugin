@@ -44,11 +44,19 @@
 
         <lang.foldingBuilder
                 language="PHP Opcodes"
-                implementationClass="com.github.xepozz.php_opcodes_language.language.PHPOpFoldingBuilder"/>
+                implementationClass="com.github.xepozz.php_opcodes_language.folding.PHPOpFoldingBuilder"/>
 
         <lang.foldingBuilder
                 language="PHP Opcodes"
-                implementationClass="com.github.xepozz.php_opcodes_language.language.PHPOpCommentFoldingBuilder"/>
+                implementationClass="com.github.xepozz.php_opcodes_language.folding.PHPOpCommentFoldingBuilder"/>
+
+        <lang.foldingBuilder
+                language="PHP Opcodes"
+                implementationClass="com.github.xepozz.php_opcodes_language.folding.PHPOpLiveRangeFoldingBuilder"/>
+
+        <lang.foldingBuilder
+                language="PHP Opcodes"
+                implementationClass="com.github.xepozz.php_opcodes_language.folding.PHPOpExceptionTableFoldingBuilder"/>
 
         <psi.referenceContributor
                 language="PHP Opcodes"

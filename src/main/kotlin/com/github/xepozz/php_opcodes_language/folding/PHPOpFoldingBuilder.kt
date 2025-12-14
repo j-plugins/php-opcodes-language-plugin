@@ -1,4 +1,4 @@
-package com.github.xepozz.php_opcodes_language.language
+package com.github.xepozz.php_opcodes_language.folding
 
 import com.github.xepozz.php_opcodes_language.language.psi.PHPOpBlock
 import com.intellij.lang.ASTNode
