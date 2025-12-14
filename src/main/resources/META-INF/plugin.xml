@@ -46,6 +46,10 @@
                 language="PHP Opcodes"
                 implementationClass="com.github.xepozz.php_opcodes_language.language.PHPOpFoldingBuilder"/>
 
+        <lang.foldingBuilder
+                language="PHP Opcodes"
+                implementationClass="com.github.xepozz.php_opcodes_language.language.PHPOpCommentFoldingBuilder"/>
+
         <psi.referenceContributor
                 language="PHP Opcodes"
                 implementation="com.github.xepozz.php_opcodes_language.reference.PHPOpReferenceContributor"/>

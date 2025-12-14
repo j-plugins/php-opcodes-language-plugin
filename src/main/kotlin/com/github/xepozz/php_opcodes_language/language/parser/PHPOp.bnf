@@ -39,9 +39,11 @@
 
 phpOpFile ::= item_*
 
-private item_ ::= block | COMMENT | EOL
+private item_ ::= block | block_comment | EOL
 
-block ::= block_name COLON (statement | live_range | exception_table | COMMENT | EOL)+
+block_comment ::= COMMENT (EOL COMMENT)+
+
+block ::= block_name COLON (statement | live_range | exception_table | block_comment | EOL)+
 {
     pin=2
 }
@@ -197,9 +199,7 @@ line_number ::= INTEGER
 exception_table ::= 'EXCEPTION TABLE:'  exception_table_statements
 {
     pin=1
-//    recoverWhile=exception_table_recover
 }
-//private exception_table_recover ::= !(EOL)
 
 exception_table_statements ::= exception_table_statement+
 
